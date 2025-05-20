@@ -1,9 +1,21 @@
-# Packt Publisher
-## Software Architecture with Spring 6 - A guide to building robust systems with Spring 6
+# 🏗️ Software Architecture with Spring 
+**Design scalable and high-performance Java applications with Spring**
 
-Welcome to the repository for **"Software Architecture with Spring 6"**! This book is a practical guide for software engineers, architects, and developers looking to master modern software architecture principles, especially in the context of Java and Spring Framework. 
+<table>
+  <tr>
+    <td><img src="book-cover.png" alt="Software Architecture with Spring" width="250"/></td>
+    <td style="vertical-align: top; padding-left: 20px;">
+      <ul>
+        <li>🔗 <strong><a href="https://lnkd.in/dZ8Wjqrd">Buy on Packt</a></strong></li>
+        <li>🛒 <strong><a href="https://packt.link/P1FKw">Buy on Amazon</a></strong></li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
-## Overview
+Welcome to the repository for **"Software Architecture with Spring"**! This book is a practical guide for software engineers, architects, and developers looking to master modern software architecture principles, especially in the context of Java and Spring Framework. 
+
+## 🔍 Overview
 
 This book explores the journey of building robust, scalable, and maintainable applications using a structured approach. It covers a wide range of architectural styles and design principles, equipping readers with insights and strategies for architecting resilient systems. From monolithic applications to microservices, this guide walks through key concepts and provides actionable examples to enhance your software architecture skills.
 
@@ -11,60 +23,68 @@ This book explores the journey of building robust, scalable, and maintainable ap
 
 The book provides sample code for each major chapter, allowing readers to experiment and implement concepts in real-world scenarios. Please check each chapter's directory for related code snippets and explanations.
 
-- ## Chapter 1 : Diving into the software architecture
+## 📘 Chapter 1: Diving into the Software Architecture
   The examples provided delve into fundamental architectural concepts, such as high and low coupling, cohesion, and the SOLID principles.
-    - ch1:
-      - 01-high-coupling-shopping-application
-      - 02-low-coupling-shopping-application
-      - 03-low-cohesion-usermanagement-application
-      - 04-high-cohesion-usermanagement-application
-      - 05-solid-srp-library-application
-      - 06-open-closed-library-application
-      - 07-liskov-substitution-library-application
-      - 08-interface-segregation-library-application
-      - 09-dependency-inversion-library-application
 
-- ## Chapter 4 : Monolithic Architecture
-  
-    - ch4:
-      - docker/
-        - postgresql/
-          - init.sql -> SQL DDL and DML
-        - .env -> PostgreSQL credentials
-        - docker-compose.yml -> Run an image of PostgreSQL and populate it with data.
-      - onlineauction/ 
-  #### Prerequisites:
-      - Java 21
-      - Docker and Docker Compose
-      - Maven 3.9.9
+### 📁 Folder Structure
 
-  ## Instructions: 
-  ### To set up environment and run the project:
+  ```
+  ch1/
+  ├── 01-high-coupling-shopping-application/           # Example with high coupling
+  ├── 02-low-coupling-shopping-application/            # Example with low coupling
+  ├── 03-low-cohesion-usermanagement-application/      # Example with low cohesion
+  ├── 04-high-cohesion-usermanagement-application/     # Example with high cohesion
+  ├── 05-solid-srp-library-application/                # SRP - Single Responsibility Principle
+  ├── 06-open-closed-library-application/              # OCP - Open/Closed Principle
+  ├── 07-liskov-substitution-library-application/      # LSP - Liskov Substitution Principle
+  ├── 08-interface-segregation-library-application/    # ISP - Interface Segregation Principle
+  └── 09-dependency-inversion-library-application/     # DIP - Dependency Inversion Principle
+```
 
+## 📦 Chapter 4: Monolithic Architecture
+
+### 📁 Folder Structure
+
+```
+ch4/
+├── docker/
+│   ├── postgresql/
+│   │   └── init.sql        # SQL DDL and DML
+│   ├── .env                # PostgreSQL credentials
+│   └── docker-compose.yml # Runs PostgreSQL and populates data
+└── onlineauction/          # Source code application
+```
+  ### ⚙️ Prerequisites
+    - ☕ Java 21  
+    - 🐳 Docker & Docker Compose  
+    - 🧰 Maven 3.9.9  
+
+  ### 🚀 Setup Instructions
+
+  #### 🐳 Spin up PostgreSQL with Docker
     1. Go the docker ch4/docker folder
     2. Execute the command: ```docker-compose up -d```
+
+  #### 🧱 Build & Run the Application
     3. Go to the project's folder: onlineauction
     4. Execute the command: ```mvn clean package```
     5. To run the project execute the command:  ```mvn spring-boot:run```
-    6. To connect to the PostgreSQL: 
-        - Url: jdbc:postgresql://localhost:5432/auction_db
-        - User: auction_app
-        - Password: auction123
-        - Database: auction_db
-    ### Access the application
-    1. Access the URL at http://localhost:8080
-    2. Click at login menu
-    3. Enter with the credencial:
-       - Administrator
-          - Username: admin
-          - Password: test123
-       - User
-          - Username: user
-          - Password: test123
 
-  ## References
-    - https://hub.docker.com/_/postgres
-    
+  ### 🌐 Accessing the Application
+    6. Open your browser and go to http://localhost:8080
+    7. Click on the Login menu  
+    8. Use one of the following credentials:
+       👑 Administrator : 
+          Username: admin - Password: test123
+       🧑‍💻 User:
+          Username: user - Password: test123
+  
+  ### 🔗 Database Connection Details
+
+  - **URL**: `jdbc:postgresql://localhost:5432/auction_db`  
+  - **User**: `auction_app`  
+  - **Password**: `auction123`  
+  - **Database**: `auction_db`
   
 - ## Chapter 5 : Client-Server Architecture
   
@@ -638,14 +658,14 @@ The book provides sample code for each major chapter, allowing readers to experi
 - Technical leads aiming to improve scalability, performance, and security in distributed systems.
 
 
-## About the Author
+## 🙋‍♂️ About the Author
+Wanderson Xesquevixos is a seasoned software engineer and architect with over twenty-five years of experience. He has dedicated his career to developing and designing complex systems for many global companies in the banking, telecom, tourism, retail, and e-commerce industries. He earned his computer science degree from UNIVAP in 2005. He holds an MBA in Data Science and Analytics and is pursuing another MBA in Software Engineering from the prestigious Universidade de São Paulo (USP). He holds certifications as a Java Programmer, Web Component Developer, JEE Business Component Developer, and AWS Certified Solutions Architect. Originally from Jacareí, SP, Wanderson resides in São Francisco do Sul, SC, with his wife Caroline and son Alexander.
+<img src="me.png" alt="Software Architecture with Spring" width="100%"/>
 
-The author, Wanderson Xesquevixos, is a seasoned software engineer and architect with over 20 years of experience in Java, Spring, and cloud-native technologies. Wanderson brings practical insights from extensive experience across diverse projects in microservices, cloud computing, and software design.
-
-## Feedback and Contributions
+## 💬 Feedback and Contributions
 
 Your feedback is invaluable! Feel free to contact us about issues, suggest improvements, or share your thoughts. This repository will be updated with any errata and additional resources to accompany the book.
 
 
-**Thank you for embarking on this journey in software architecture! Happy coding and architecting!**
+**🚀 Thank you for embarking on this journey in software architecture! Happy coding and architecting!**
 

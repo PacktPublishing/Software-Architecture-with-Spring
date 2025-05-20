@@ -29,8 +29,7 @@ public class LoginIntegrationTests {
     @Test
     public void testSuccessfulLogin() throws Exception {
         mockMvc.perform(formLogin("/login").user("user").password("test123"))
-                .andExpect(redirectedUrl("/home"))
-        ;
+                .andExpect(redirectedUrl("/home"));
     }
 
 

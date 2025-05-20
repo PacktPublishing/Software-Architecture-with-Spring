@@ -28,14 +28,11 @@
 <body>
 <div class="container mt-5">
     <div class="d-flex justify-content-end">
-        <!-- Button that navigates to the products page -->
-
     </div>
 </div>
 
 <div layout:fragment="content">
     <div class="d-flex justify-content-end">
-        <!-- Plus rounded button -->
         <a th:href="@{/products/add}" class="btn btn-success btn-circle">+</a>
     </div>
     <div class="container mt-5">
@@ -60,19 +57,18 @@
                 </td>
                 <td>
                     <div class=" mt-5 d-flex align-items-start flex-column">
-                        <a th:href="@{/products/edit}" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/products/edit}" class="btn btn-primary" onclick="return false;" tabindex="-1" aria-disabled="true">Edit</a>
                     </div>
                 </td>
                 <td>
                     <div class=" mt-5 d-flex align-items-start flex-column">
-                        <a th:href="@{/products/delete}" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/products/delete}" class="btn btn-danger disabled" onclick="return false;" tabindex="-1" aria-disabled="true">Delete</a>
                     </div>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </div>
 </body>

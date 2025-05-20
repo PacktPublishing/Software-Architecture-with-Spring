@@ -9,8 +9,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<BusinessExceptionResponse> handleException(BusinessException e){
-        BusinessExceptionResponse response = BusinessExceptionResponse.builder()
+    public ResponseEntity<BusinessExceptionResponse<Object>> handleException(BusinessException e){
+        BusinessExceptionResponse<Object> response = BusinessExceptionResponse.builder()
                 .code(e.getCode())
                 .message(e.getLocalizedMessage())
                 .build();

@@ -1,6 +1,5 @@
 package com.packtpub.onlineauction;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,14 +11,16 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @SpringBootApplication
 public class OnlineauctionApplication {
 
-	@Autowired
-	private ThymeleafProperties properties;
+	private final ThymeleafProperties properties;
 
 	@Value("${spring.thymeleaf.templates_root:}")
 	private String templatesRoot;
 
+    public OnlineauctionApplication(ThymeleafProperties properties) {
+        this.properties = properties;
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		SpringApplication.run(OnlineauctionApplication.class, args);
 	}
 

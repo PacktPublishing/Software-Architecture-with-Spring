@@ -5,8 +5,6 @@ public class Magazine implements ValidateIssn, Publication {
     private String publisher;
     private String issn;
 
-    // Constructor, getters, and setters
-
     @Override
     public boolean validateIssn(String issn) {
         // Implement ISSN validation logic
