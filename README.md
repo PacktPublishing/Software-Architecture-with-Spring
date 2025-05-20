@@ -651,21 +651,19 @@ ch4/
         - User: auction_app
         - Password: auction123 
 
-### Who This Book is For
+### 👨‍💼 Who This Book is For
 
-- Software architects looking to deepen their knowledge of Spring-based architecture.
-- Developers and engineers involved in designing, implementing, or evolving software systems.
-- Technical leads aiming to improve scalability, performance, and security in distributed systems.
-
-
-## 🙋‍♂️ About the Author
-Wanderson Xesquevixos is a seasoned software engineer and architect with over twenty-five years of experience. He has dedicated his career to developing and designing complex systems for many global companies in the banking, telecom, tourism, retail, and e-commerce industries. He earned his computer science degree from UNIVAP in 2005. He holds an MBA in Data Science and Analytics and is pursuing another MBA in Software Engineering from the prestigious Universidade de São Paulo (USP). He holds certifications as a Java Programmer, Web Component Developer, JEE Business Component Developer, and AWS Certified Solutions Architect. Originally from Jacareí, SP, Wanderson resides in São Francisco do Sul, SC, with his wife Caroline and son Alexander.
-<div align="center"><img src="me.png" alt="Software Architecture with Spring" width="50%"/></div>
+  - 🔧 Software architects looking to deepen Spring-based architecture skills
+  - 💻 Developers & engineers designing scalable systems
+  - 👨‍📈 Technical leads focused on performance, scalability, and security
 
 ## 💬 Feedback and Contributions
 
 Your feedback is invaluable! Feel free to contact us about issues, suggest improvements, or share your thoughts. This repository will be updated with any errata and additional resources to accompany the book.
 
+## 👤 About the Author
+Wanderson Xesquevixos is a seasoned software engineer and architect with over twenty-five years of experience. He has dedicated his career to developing and designing complex systems for many global companies in the banking, telecom, tourism, retail, and e-commerce industries. He earned his computer science degree from UNIVAP in 2005. He holds an MBA in Data Science and Analytics and is pursuing another MBA in Software Engineering from the prestigious Universidade de São Paulo (USP). He holds certifications as a Java Programmer, Web Component Developer, JEE Business Component Developer, and AWS Certified Solutions Architect. Originally from Jacareí, SP, Wanderson resides in São Francisco do Sul, SC, with his wife Caroline and son Alexander.
+<div align="center"><img src="me.png" alt="Software Architecture with Spring" width="50%"/></div>
 
-**🚀 Thank you for embarking on this journey in software architecture! Happy coding and architecting!**
 
+*🚀 Thank you for embarking on this journey in software architecture! Happy coding and architecting!**
