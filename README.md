@@ -1,7 +1,7 @@
 # 🏗️ Software Architecture with Spring 
 **Design scalable and high-performance Java applications with Spring**
 
-<table>
+<table style="border: none;">
   <tr>
     <td><img src="book-cover.png" alt="Software Architecture with Spring" width="250"/></td>
     <td style="vertical-align: top; padding-left: 20px;">
@@ -660,7 +660,7 @@ ch4/
 
 ## 🙋‍♂️ About the Author
 Wanderson Xesquevixos is a seasoned software engineer and architect with over twenty-five years of experience. He has dedicated his career to developing and designing complex systems for many global companies in the banking, telecom, tourism, retail, and e-commerce industries. He earned his computer science degree from UNIVAP in 2005. He holds an MBA in Data Science and Analytics and is pursuing another MBA in Software Engineering from the prestigious Universidade de São Paulo (USP). He holds certifications as a Java Programmer, Web Component Developer, JEE Business Component Developer, and AWS Certified Solutions Architect. Originally from Jacareí, SP, Wanderson resides in São Francisco do Sul, SC, with his wife Caroline and son Alexander.
-<img src="me.png" alt="Software Architecture with Spring" width="100%"/>
+<div align="center"><img src="me.png" alt="Software Architecture with Spring" width="50%"/></div>
 
 ## 💬 Feedback and Contributions
 
