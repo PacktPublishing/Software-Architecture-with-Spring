@@ -666,4 +666,4 @@ Wanderson Xesquevixos is a seasoned software engineer and architect with over tw
 <div align="center"><img src="me.png" alt="Software Architecture with Spring" width="50%"/></div>
 
 
-*🚀 Thank you for embarking on this journey in software architecture! Happy coding and architecting!**
+*🚀 Thank you for embarking on this journey in software architecture! Happy coding and architecting!*
