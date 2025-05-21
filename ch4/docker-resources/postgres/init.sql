@@ -15,8 +15,7 @@ ALTER SEQUENCE products_id_seq RESTART WITH 3;
 
 create table roles
 (
-    role_id   bigserial
-        primary key,
+    role_id   bigserial primary key,
     role_name varchar(255)
 );
 

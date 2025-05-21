@@ -9,6 +9,5 @@ import java.util.Optional;
 
 public interface ProductService {
     Optional<List<Product>> getAllProducts();
-    void saveProduct(Product product, MultipartFile file) throws IOException;
     Optional<Product> getProductById(Integer id);
 }

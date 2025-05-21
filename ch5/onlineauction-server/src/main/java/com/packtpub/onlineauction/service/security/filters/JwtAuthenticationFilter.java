@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -27,28 +29,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsCustomService userDetailsService;
 
-    private static final String AUTH_PATH = "/api/auth";
-    private static final String SWAGGER_PATH = "/swagger-ui/index.html";
+    private static final List<String> PUBLIC_PATHS = List.of(
+            "/api/auth",
+            "/swagger-ui/index.html",
+            "/swagger-ui/",
+            "/v3/api-docs" // You can add more if needed
+    );
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
-
-        if (AUTH_PATH.equals(request.getRequestURI()) || SWAGGER_PATH.equals(request.getRequestURI())) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
-
-            //handlerExceptionResolver.resolveException(request, response, null, new AccessDeniedException("Access denied"));
-            return;
-
-        }
-
         try {
+
+            final String authHeader = request.getHeader("Authorization");
+            String requestURI = request.getRequestURI();
+
+            if (PUBLIC_PATHS.stream().anyMatch(requestURI::startsWith)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                throw new BadCredentialsException("Token not found");
+            }
+
             final String jwt = authHeader.substring(7);
             final String username = jwtService.extractUsername(jwt);
 

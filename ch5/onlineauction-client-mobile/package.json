@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@expo/metro-runtime": "~4.0.0",
+    "@expo/metro-runtime": "~5.0.4",
     "@expo/vector-icons": "^14.0.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.4.0",
@@ -8,7 +8,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.4",
     "axios": "^1.7.2",
-    "expo": "^52.0.7",
+    "expo": "^53.0.9",
     "expo-asset": "~11.0.1",
     "expo-constants": "~17.0.3",
     "expo-font": "~13.0.1",
@@ -18,11 +18,11 @@
     "expo-web-browser": "~14.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.2",
+    "react-native": "0.76.9",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-reanimated": "~3.16.1",
     "react-native-safe-area-context": "4.12.0",
-    "react-native-screens": "~4.0.0",
+    "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13"
   },
   "devDependencies": {

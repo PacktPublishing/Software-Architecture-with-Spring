@@ -1,12 +1,14 @@
 package com.packtpub.onlineauction.service.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Function;
 
@@ -51,16 +53,34 @@ public class JwtService {
 
     private String createToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .header().type("JWT").and()
+                .claims(claims)
+                .subject(subject)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
                 .compact();
+
+        /**
+         *  The code below is deprecated in the latest versions of jjwt
+         *  return Jwts.builder()
+         *              .setClaims(claims)
+         *              .setSubject(subject)
+         *              .setIssuedAt(new Date(System.currentTimeMillis()))
+         *              .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
+         *              .signWith(SignatureAlgorithm.HS256, secretKey)
+         *              .compact();
+         *
+         */
+
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secretKey).build().parseSignedClaims(token).getPayload();
+        Jwt<?, ?> jwt = Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+                .build()
+                .parse(token);
+        return (Claims) jwt.getPayload();
     }
 
     private Boolean isTokenExpired(String token) {

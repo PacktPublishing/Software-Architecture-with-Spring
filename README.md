@@ -47,7 +47,7 @@ The book provides sample code for each major chapter, allowing readers to experi
 
 ```
 ch4/
-├── docker/
+├── docker-resources/
 │   ├── postgresql/
 │   │   └── init.sql        # SQL DDL and DML
 │   ├── .env                # PostgreSQL credentials
@@ -85,81 +85,150 @@ ch4/
   - **User**: `auction_app`  
   - **Password**: `auction123`  
   - **Database**: `auction_db`
-  
-- ## Chapter 5 : Client-Server Architecture
-  
-    - ch5:
-      - docker/
-        - postgresql/
-          - init.sql -> SQL DDL and DML
-        - .env -> PostgreSQL credentials
-        - docker-compose.yml -> Run an image of PostgreSQL and populate it with data.
-      - onlineauction/ -> Server application
-      - onlineauction-client-mobile -> Mobile application (Client)
-      - onlineauction-client-web -> Web application (Client)
 
-  #### Prerequisites:
-      - Java 21
-      - Docker and Docker Compose
-      - Maven 3.9.9
-      - Node.js and npm
-      - React
-      - React Native
-      - Expo Go App
+## 📦 Chapter 5: Client-Server Architecture
+
+### 📁 Folder Structure
+
+```
+ch5/
+├── docker-resources/
+│   ├── postgresql/
+│   │   └── init.sql              # SQL DDL and DML scripts
+│   ├── .env                      # PostgreSQL credentials
+│   └── docker-compose.yml        # Spins up PostgreSQL and populates data
+├── onlineauction/                # Server application
+├── onlineauction-client-mobile/  # Mobile client application
+└── onlineauction-client-web/     # Web client application
+```
+
+---
+
+### ⚙️ Prerequisites
+
+- ☕ Java 21  
+- 🐳 Docker & Docker Compose  
+- 🧰 Maven 3.9.9  
+- 🌐 Node.js and npm  
+- ⚛️ React  
+- 📱 React Native  
+- 📲 Expo Go App  
+
+---
+
+### 🚀 Setup Instructions
+
+#### 🐳 Set Up and Run the Server
+
+1. Navigate to the Docker folder: ch5/docker-resources
+2. Start the containers:  
+   ```bash
+   docker-compose up -d
+   ```
+3. Navigate to the server project folder: ch5/onlineauction-server
+4. Build the application:  
+   ```bash
+   mvn clean package
+   ```
+5. Run the application:  
+   ```bash
+   mvn spring-boot:run
+   ```
+6. Access OpenAPI documentation:  
+   [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+7. Credentials to generate a token:
+   - 👑 **Administrator**  
+     - Username: `admin`  
+     - Password: `test123`  
+   - 🧑‍💻 **User**  
+     - Username: `user`  
+     - Password: `test123`  
 
 
-  ## Instructions: 
-  ### To set up environment and run the project (Server):
+### 🔗 Database Connection Details
 
-    1. Go the docker ch5/docker folder
-    2. Execute the command: ```docker-compose up -d```
-    3. Go to the project's folder: onlineauction
-    4. Execute the command: ```mvn clean package```
-    5. To run the project execute the command:  ```mvn spring-boot:run```
-    6. To connect to the PostgreSQL: 
-        - Url: jdbc:postgresql://localhost:5432/auction_db
-        - User: auction_app
-        - Password: auction123
-        - Database: auction_db
-    7. OpenAPI documentation can be accessed at http://localhost:8080/swagger-ui/index.html.
+  - **URL**: `jdbc:postgresql://localhost:5432/auction_db`  
+  - **User**: `auction_app`  
+  - **Password**: `auction123`  
+  - **Database**: `auction_db`
 
-    ### To set up environment and run the project (Web Client):
-    1. Go to the project's folder: onlineauctiononlineauction-client-web
-    2. Execute the command: ```npm install```
-    3. Execute the command: ```npm start  ```
-    4. Access the URL at http://localhost:3000/
-    5. Enter with the credencial:
-       - Administrator
-          - Username: admin
-          - Password: test123
-       - User
-          - Username: user
-          - Password: test123
+---
 
-    ### To set up environment and run the project (Mobile Client):
-    1. Go to the project's folder: onlineauctiononlineauction-client-mobile
-    2. Execute the command: ```npm install -g expo-cli```
-    3. Execute the command: ```npm install```
-    4. Execute the command: ```expo doctor --fix-dependencies```
-    5. Execute the command: ```npx expo-doctor```
-    6. Execute the command: ```npx expo install --check```
-    7. Execute the command: ```npm install expo@latest```
-    8. Execute the command: ```npx expo install @expo/metro-runtime```
-    9. Execute the command: ```npx expo start```
-    10. To see the application in the web browser, press w
-    11. To see the application on the Expo Go app, install Expo Go on your mobile device and scan the QR code.
-    12. Enter with the credencial:
-        - Administrator
-          - Username: admin
-          - Password: test123
-        - User
-          - Username: user
-          - Password: test123
-    
-   PS: Some commands may not be necessary, but following these steps will allow you to run the application and view it through Expo Go. 
-   You may update the dependencies with the command ``` expo install <dependency> ```.
-    In this case, nothing is better than asking our friend to chat GTP or something else to provide us with the command. ;)
-   
+#### 🌐 Run the Web Client
+
+1. Navigate to the web client folder: ch5/onlineauction-client-web
+
+2. Install dependencies:  
+   ```bash
+   npm install
+   ```
+3. Start the application:  
+   ```bash
+   npm start
+   ```
+4. Access the web app at:  
+   [http://localhost:3000](http://localhost:3000)
+
+5. Use the following credentials to log in:  
+   - 👑 **Administrator**  
+     - Username: `admin`  
+     - Password: `test123`  
+   - 🧑‍💻 **User**  
+     - Username: `user`  
+     - Password: `test123`  
+
+---
+
+#### 📱 Run the Mobile Client
+
+1. Navigate to the mobile client folder: ch5/onlineauction-client-mobile  
+2. Install Expo CLI globally (you may need to use sudo):  
+   ```bash
+   npm install -g expo-cli
+   ```
+3. Install project dependencies:  
+   ```bash
+   npm install
+   ```
+4. Fix dependencies (if needed):  
+   ```bash
+   expo doctor --fix-dependencies
+   ```
+5. Check configuration:  
+   ```bash
+   npx expo-doctor
+   ```
+6. Install required dependencies:  
+   ```bash
+   npx expo install --check
+   ```
+7. Update Expo:  
+   ```bash
+   npm install expo@latest
+   ```
+8. Install Expo Metro runtime:  
+   ```bash
+   npx expo install @expo/metro-runtime
+   ```
+9. Start the app:  
+   ```bash
+   npx expo start
+   ```
+10. Press `w` to open the app in the browser, or scan the QR code with Expo Go.  
+
+11. Use the following credentials to log in:  
+   - 👑 **Administrator**  
+     - Username: `admin`  
+     - Password: `test123`  
+   - 🧑‍💻 **User**  
+     - Username: `user`  
+     - Password: `test123`  
+
+---
+
+> 📝 **Note**: Some commands may not be necessary, but following these steps ensures the app runs on Expo Go.  
+
 - ## Chapter 6 : Microservices Architecture
   
     - ch6:
