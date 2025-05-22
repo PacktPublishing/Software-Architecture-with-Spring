@@ -330,7 +330,7 @@ mvn spring-boot:run
 - 👤 **User Service**: [localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
 - 📦 **Product Service**: [localhost:8082/swagger-ui/index.html](http://localhost:8082/swagger-ui/index.html)
 
-### 🔗 Database Connection Details (Tools: )
+### 🔗 Database Connection Details
 	•	PostgreSQL
 	•	🛢️ User DB URL: jdbc:postgresql://localhost:5432/user_db
 	•	🛢️ Product DB URL: jdbc:postgresql://localhost:5432/product_db
