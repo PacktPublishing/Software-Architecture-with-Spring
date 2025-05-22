@@ -19,6 +19,24 @@ Welcome to the repository for **"Software Architecture with Spring"**! This book
 
 This book explores the journey of building robust, scalable, and maintainable applications using a structured approach. It covers a wide range of architectural styles and design principles, equipping readers with insights and strategies for architecting resilient systems. From monolithic applications to microservices, this guide walks through key concepts and provides actionable examples to enhance your software architecture skills.
 
+## 🛠️ Tools to Follow Along the Examples
+
+### 💻 IDEs
+- [IntelliJ](https://www.jetbrains.com/idea/download) – JetBrains Java IDE
+- [Spring Tools](https://spring.io/tools) – Spring-based Eclipse distribution
+- [Visual Studio Code](https://code.visualstudio.com/download) – Lightweight code editor
+
+### 🗄️ Database Clients
+- [DBeaver](https://dbeaver.io/) – Universal database client
+- [Compass](https://www.mongodb.com/try/download/compass) – MongoDB GUI
+- [DataGrip](https://www.jetbrains.com/datagrip/download) – JetBrains SQL IDE
+
+### 🔌 API Testing Tools
+- [Postman](https://www.postman.com/downloads/) – API platform for building and testing APIs
+
+## 🐳 Containerization
+- [Docker](https://www.docker.com/get-started/) – Container platform for building and running applications
+
 ### Sample Code
 
 The book provides sample code for each major chapter, allowing readers to experiment and implement concepts in real-world scenarios. Please check each chapter's directory for related code snippets and explanations.
@@ -229,69 +247,99 @@ ch5/
 
 > 📝 **Note**: Some commands may not be necessary, but following these steps ensures the app runs on Expo Go.  
 
-- ## Chapter 6 : Microservices Architecture
-  
-    - ch6:
-      - docker/
-        - postgresql/
-          - init.sql -> SQL DDL and DML
-        - mongo-init/
-          - init.js -> Create database, collection and insert data.
-        - .env -> PostgreSQL and MongoDB credentials
-        - docker-compose.yml -> Run an image of PostgreSQL and MongoDB, populate them with data, and run all microservices.
-      - docker-resources/
-        - postgresql/
-          - init.sql -> SQL DDL and DML
-        - mongo-init/
-          - init.js -> Create database, collection and insert data.
-        - .env -> PostgreSQL and MongoDB credentials
-        - docker-compose.yml -> Create the databases PostgreSQL and MongoDB and populate them with data. This is useful to run the code in an IDE.
-      - postman
-        - ch6.postman_collection.json -> Postman collection for chapter 6 to request the services.
-      - authentication-services -> Code to authentication services.
-      - user-services -> Code to authentication services.
-      - product-services -> Code to authentication services.
+Here’s the formatted content for Chapter 6: Microservices Architecture in the same style as your Chapter 5 section. You can copy and paste it directly into your README.md:
 
-  #### Prerequisites:
-      - Java 21
-      - Docker and Docker Compose
-      - Maven 3.9.9
+## 🧩 Chapter 6: Microservices Architecture
+
+### 📁 Folder Structure
+```
+ch6/
+├── docker/
+│   ├── postgresql/
+│   │   └── init.sql               # SQL DDL and DML scripts
+│   ├── mongo-init/
+│   │   └── init.js                # MongoDB: create DB, collections, insert data
+│   ├── .env                       # PostgreSQL and MongoDB credentials
+│   └── docker-compose.yml        # Spins up PostgreSQL, MongoDB, and all microservices
+├── docker-resources/
+│   ├── postgresql/
+│   │   └── init.sql               # SQL DDL and DML scripts
+│   ├── mongo-init/
+│   │   └── init.js                # MongoDB: create DB, collections, insert data
+│   ├── .env                       # PostgreSQL and MongoDB credentials
+│   └── docker-compose.yml        # Spins up databases and populates data for IDE execution
+├── postman/
+│   └── ch6.postman_collection.json  # Postman collection to test all services
+├── authentication-services/      # Authentication microservice
+├── user-services/                # User microservice
+└── product-services/             # Product microservice
+```
+
+### ⚙️ Prerequisites
+	•	☕ Java 21
+	•	🐳 Docker & Docker Compose
+	•	🧰 Maven 3.9.9
+
+### 🚀 Setup Instructions
+
+#### 👨‍💻 Run Microservices via IDE
+1.	Navigate to the Docker folder: ch6/docker-resources
+2.	Start the containers:
+
+```
+docker-compose up -d
+```
+
+3.	Open the microservices (authentication-services, user-services, product-services) in your IDE
+4.	For each microservice, run the following commands:
+```  
+mvn clean package
+mvn spring-boot:run
+```
+5.	Navigate to the postman folder and import the collection ch6.postman_collection.json [Postman Import Documentation](https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-data/)
+6.	Use Postman to trigger requests to the microservices
+7.  Use the following credentials to generate the token:  
+   - 👑 **Administrator**  
+     - Username: `admin@wxauction.com`  
+     - Password: `test123`  
+   - 🧑‍💻 **User**  
+     - Username: `user@wxauction.com`  
+     - Password: `test123`
 
 
-  ## Instructions: 
-  ### To set up environment and run the project (Run the services without code):
+#### 🛠️ Run All Services Without Code (Using Prebuilt Images)
 
-    1. Go the docker ch6/docker folder
-    2. Execute the command: ```docker-compose up -d```
-    3. Go to the project's folder: postman and import the collection
-    4. Now, execute the request for the desired service.
-    5. To connect to the PostgreSQL: 
-        - Url user database: jdbc:postgresql://localhost:5432/user_db
-        - Url product database: jdbc:postgresql://localhost:5432/product_db
-        - User: auction_app
-        - Password: auction123
-    6. To connect to the MongoDB: mongodb://auction_app:auction123@localhost:27017/
-    authentication_db?authSource=admin
-        - User: auction_app
-        - Password: auction123
+1. Navigate to the Docker folder: ch6/docker
+2. Start the containers:
+```
+  docker-compose up -d
+```
+3. Navigate to the postman folder and import the collection ch6.postman_collection.json
+4. Use Postman to trigger requests to the microservices
+5. Use the following credentials to generate the token:  
+   - 👑 **Administrator**  
+     - Username: `admin@wxauction.com`  
+     - Password: `test123`  
+   - 🧑‍💻 **User**  
+     - Username: `user@wxauction.com`  
+     - Password: `test123`
 
-  ### To set up environment and run the project (Run the services via IDE):
+### 📄 Swagger API Documentation
 
-    1. Go the docker ch6/docker-resources folder
-    2. Execute the command: ```docker-compose up -d```
-    3. Open the microservices into your favorite IDE 
-    4. For each microservices execute the command: ```mvn clean package``` and then  ```mvn spring-boot:run```    
-    5. Go to the project's folder: postman and import the collection
-    6. Now, execute the request for the desired service.
-    5. To connect to the PostgreSQL: 
-        - Url user database: jdbc:postgresql://localhost:5432/user_db
-        - Url product database: jdbc:postgresql://localhost:5432/product_db
-        - User: auction_app
-        - Password: auction123
-    6. To connect to the MongoDB: mongodb://auction_app:auction123@localhost:27017/
-    authentication_db?authSource=admin
-        - User: auction_app
-        - Password: auction123
+- 🔐 **Authentication Service**: [localhost:8081/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- 👤 **User Service**: [localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
+- 📦 **Product Service**: [localhost:8082/swagger-ui/index.html](http://localhost:8082/swagger-ui/index.html)
+
+### 🔗 Database Connection Details (Tools: )
+	•	PostgreSQL
+	•	🛢️ User DB URL: jdbc:postgresql://localhost:5432/user_db
+	•	🛢️ Product DB URL: jdbc:postgresql://localhost:5432/product_db
+	•	👤 User: auction_app
+	•	🔑 Password: auction123
+	•	MongoDB
+	•	🌐 URL: mongodb://auction_app:auction123@localhost:27017/authentication_db?authSource=admin
+	•	👤 User: auction_app
+	•	🔑 Password: auction123
 
 - ## Chapter 7 : Microservices Patterns with Spring Cloud
   ### ALERT ###

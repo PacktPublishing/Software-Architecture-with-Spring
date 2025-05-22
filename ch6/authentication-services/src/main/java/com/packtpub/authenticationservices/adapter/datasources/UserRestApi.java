@@ -26,7 +26,7 @@ public class UserRestApi implements UserRepository {
                 .uri(userServiceUrl + "/v1/users/{username}/roles", username)
                 .retrieve()
                 .body(RoleResponse.class);
-        return result.getRoles();
+        return result != null ? result.getRoles() : null;
     }
 
 }

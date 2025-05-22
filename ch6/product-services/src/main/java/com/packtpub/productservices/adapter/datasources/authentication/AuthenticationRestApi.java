@@ -18,14 +18,13 @@ public class AuthenticationRestApi {
     }
 
     public AuthenticationUser validateToken(String token) {
-        AuthenticationUser authenticationUser = restClient.get()
+        return restClient.get()
                 .uri(authenticationServiceUrl + "/v1/api/auth/validate?token={token}", token)
                 .retrieve()
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
                     throw new BusinessException(response.getStatusCode().toString(), response.getStatusText());
                 })
                 .body(AuthenticationUser.class);
-        return authenticationUser;
     }
 
 }

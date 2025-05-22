@@ -4,11 +4,11 @@ import com.packtpub.userservices.adapter.datasources.authentication.Authenticati
 import com.packtpub.userservices.adapter.datasources.authentication.AuthenticationUser;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,30 +27,40 @@ public class ExternalTokenValidationFilter extends OncePerRequestFilter {
     private final HandlerExceptionResolver handlerExceptionResolver;
     private final AuthenticationRestApi authenticationRestApi;
 
+    private static final List<Pattern> PUBLIC_PATH_PATTERNS = List.of(
+            Pattern.compile("^/v1/users/[^/]+/roles$"),
+            Pattern.compile("^/swagger-ui/index.html$"),
+            Pattern.compile("^/swagger-ui/.*$"),
+            Pattern.compile("^/v3/api-docs$"),
+            Pattern.compile("^/v3/api-docs/swagger-config$")
+    );
+
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) {
 
         try {
             final String authHeader = request.getHeader("Authorization");
-            String token = null;
+            String requestURI = request.getRequestURI();
 
-            if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                token = authHeader.substring(7);
+            if (PUBLIC_PATH_PATTERNS.stream().anyMatch(pattern -> pattern.matcher(requestURI).matches())) {
+                filterChain.doFilter(request, response);
+                return;
             }
 
-            if (token != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                AuthenticationUser authenticationUser = authenticationRestApi.validateToken(authHeader);
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                throw new BadCredentialsException("Token not found");
+            }
 
-                if (authenticationUser != null) {
+            AuthenticationUser authenticationUser = authenticationRestApi.validateToken(authHeader);
 
-                    List<SimpleGrantedAuthority> authorities = authenticationUser.getRoles().stream()
-                            .map(SimpleGrantedAuthority::new)
-                            .collect(Collectors.toList());
+            if (authenticationUser != null) {
+                List<SimpleGrantedAuthority> authorities = authenticationUser.getRoles().stream()
+                        .map(SimpleGrantedAuthority::new)
+                        .collect(Collectors.toList());
 
-                    SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(authenticationUser.getRoles(), null, authorities));
-                } else {
-                    throw new ExpiredJwtException(null, null, authHeader);
-                }
+                SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(authenticationUser.getRoles(), null, authorities));
+            } else {
+                throw new ExpiredJwtException(null, null, authHeader);
             }
 
             filterChain.doFilter(request, response);

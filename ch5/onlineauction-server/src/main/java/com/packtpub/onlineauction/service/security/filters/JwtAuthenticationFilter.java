@@ -33,11 +33,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             "/api/auth",
             "/swagger-ui/index.html",
             "/swagger-ui/",
-            "/v3/api-docs" // You can add more if needed
+            "/v3/api-docs"
     );
 
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) {
 
         try {
 
