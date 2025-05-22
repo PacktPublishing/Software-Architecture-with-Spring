@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new
                         UsernameNotFoundException("User not found with username: " + username));
 
-        UserDetailsCustom userDetailsCustom = new UserDetailsCustom(
+        return new UserDetailsCustom(
                 authentication.getUsername(),
                 authentication.getPassword(),
                 authorityList,
@@ -37,6 +37,5 @@ public class CustomUserDetailsService implements UserDetailsService {
                 authentication.isAccountNonLocked(),
                 authentication.isCredentialsNonExpired()
         );
-        return userDetailsCustom;
     }
 }
