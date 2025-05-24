@@ -16,7 +16,6 @@ spring:
             - Path=/authentication/**
           filters:
             - RewritePath=/authentication/(?<path>.*), /$\{path}
-#            - CustomHeaderFilter
 eureka:
   instance:
     preferIpAddress: true

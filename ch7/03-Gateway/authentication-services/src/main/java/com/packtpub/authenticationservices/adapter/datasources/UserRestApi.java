@@ -1,6 +1,5 @@
 package com.packtpub.authenticationservices.adapter.datasources;
 
-//import com.packtpub.authenticationservices.config.correlation.CorrelationIdUtil;
 import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.response.RoleResponse;
 import com.packtpub.authenticationservices.internal.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,6 @@ public class UserRestApi implements UserRepository {
         RoleResponse result = restClient.build()
                 .get()
                 .uri(URI.create("http://USER-SERVICES/v1/users/" + username + "/roles"))
-//                .header("x-correlation-id", CorrelationIdUtil.getCorrelationId())
                 .retrieve()
                 .body(RoleResponse.class);
         return result.getRoles();

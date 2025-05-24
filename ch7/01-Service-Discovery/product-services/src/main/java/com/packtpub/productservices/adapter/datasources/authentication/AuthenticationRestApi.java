@@ -1,7 +1,6 @@
 package com.packtpub.productservices.adapter.datasources.authentication;
 
 import com.packtpub.productservices.internal.exception.BusinessException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatusCode;
@@ -21,16 +20,15 @@ public class AuthenticationRestApi {
 
     public AuthenticationUser validateToken(String token) {
 
-        ServiceInstance serviceInstance = discoveryClient.getInstances("AUTHENTICATION-SERVICES").get(0);
+        ServiceInstance serviceInstance = discoveryClient.getInstances("AUTHENTICATION-SERVICES").getFirst();
 
-        AuthenticationUser authenticationUser = restClient.get()
+        return restClient.get()
                 .uri(serviceInstance.getUri() + "/v1/api/auth/validate?token={token}", token)
                 .retrieve()
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
                     throw new BusinessException(response.getStatusCode().toString(), response.getStatusText());
                 })
                 .body(AuthenticationUser.class);
-        return authenticationUser;
     }
 
 }

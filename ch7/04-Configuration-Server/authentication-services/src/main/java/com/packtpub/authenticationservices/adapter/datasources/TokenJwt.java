@@ -2,13 +2,14 @@ package com.packtpub.authenticationservices.adapter.datasources;
 
 import com.packtpub.authenticationservices.internal.entities.Authentication;
 import com.packtpub.authenticationservices.internal.repositories.TokenRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
@@ -26,12 +27,14 @@ public class TokenJwt implements TokenRepository {
 
     @Override
     public String generate(Authentication user) {
+
         return Jwts.builder()
-                .setSubject(user.getUsername())
+                .header().type("JWT").and()
                 .claim("roles", user.getRoles())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .subject(user.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .signWith(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
                 .compact();
     }
 
@@ -41,13 +44,9 @@ public class TokenJwt implements TokenRepository {
             token = token.replaceFirst("Bearer ", "");
             final Claims claims = extractAllClaims(token);
             return new Authentication(claims.getSubject(), (List) claims.get("roles"));
-        } catch (Exception ex){
-            return null;
+        } catch (Exception ex) {
+            throw new BadCredentialsException("Invalid JWT token", ex);
         }
-    }
-
-    private String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
     }
 
     private Date extractExpiration(String token) {
@@ -60,10 +59,11 @@ public class TokenJwt implements TokenRepository {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secretKey).build().parseSignedClaims(token).getPayload();
+        Jwt<?, ?> jwt = Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+                .build()
+                .parse(token);
+        return (Claims) jwt.getPayload();
     }
 
-    private Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
 }

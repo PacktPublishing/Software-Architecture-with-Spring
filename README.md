@@ -341,181 +341,133 @@ mvn spring-boot:run
 	•	👤 User: auction_app
 	•	🔑 Password: auction123
 
-- ## Chapter 7 : Microservices Patterns with Spring Cloud
-  ### ALERT ###
-  Run the services in the order they appear for each folder. Generally, it is :
-   1. service-discovery-services
-   2. configuration-services
-   3. gateway-services
-   4. Other services such as authentication, user, and product services.
 
-   ### ALERT 2 ###
-   Please wait up to 30 seconds after starting the services before making requests. Eureka requires this time to register all services and synchronize its registry due to default heartbeat and cache update intervals. Reducing this delay is possible but expected in the default configuration.
+## 🧩 Chapter 7: Microservices Patterns with Spring Cloud
 
-   ## Chapter 7 - Folder's structure 
-    - ch7:
-      - ## 01-Service-Discovery - Discovering and registering services with Eureka
-        - 01-Service-Discovery/
-          - docker/
-            - postgresql/
-              - init.sql -> SQL DDL and DML
-            - mongo-init/
-              - init.js -> Create database, collection and insert data.
-            - .env -> PostgreSQL and MongoDB credentials
-            - docker-compose.yml -> Run an image of PostgreSQL and MongoDB, populate them with data, and run all microservices.
-          - service-discovery-services -> Service discovery (Eureka Server) code.
-          - authentication-services -> Authentication services code.
-          - user-services -> User services code.
-          - product-services -> Product services code.
-        - docker-resources/
-          - postgresql/
-            - init.sql -> SQL DDL and DML
-          - mongo-init/
-            - init.js -> Create database, collection and insert data.
-          - .env -> PostgreSQL and MongoDB credentials
-          - docker-compose.yml -> Create the databases PostgreSQL and MongoDB and populate them with data. This is useful to run the code in an IDE.
-      - ## 02-Load-Balancer - Balancing the load with Spring Cloud LoadBalancer
-        - 02-Load-Balancer  
-          - docker/
-            - postgresql/
-              - init.sql -> SQL DDL and DML
-            - mongo-init/
-              - init.js -> Create database, collection and insert data.
-            - .env -> PostgreSQL and MongoDB credentials
-            - docker-compose.yml -> Run an image of PostgreSQL and MongoDB, populate them with data, and run all microservices.
-          - service-discovery-services -> Service discovery (Eureka Server) code.
-          - authentication-services -> Authentication services code.
-          - user-services -> User services code.
-          - product-services -> Product services code.
-        - docker-resources/
-          - postgresql/
-            - init.sql -> SQL DDL and DML
-          - mongo-init/
-            - init.js -> Create database, collection and insert data.
-          - .env -> PostgreSQL and MongoDB credentials
-          - docker-compose.yml -> Create the databases PostgreSQL and MongoDB and populate them with data. This is useful to run the code in an IDE.
-      - ## 03-Gateway - Routing with Spring Cloud Gateway
-        - 03-Gateway/ 
-        - docker/
-          - postgresql/
-            - init.sql -> SQL DDL and DML
-          - mongo-init/
-            - init.js -> Create database, collection and insert data.
-          - .env -> PostgreSQL and MongoDB credentials
-          - docker-compose.yml -> Run an image of PostgreSQL and MongoDB, populate them with data, and run all microservices.
-        - service-discovery-services -> Service discovery (Eureka Server) code.
-        - gateway-services -> Gateway services code.
-        - authentication-services -> Authentication services code.
-        - user-services -> User services code.
-        - product-services -> Product services code.
-      - docker-resources/
-        - postgresql/
-          - init.sql -> SQL DDL and DML
-        - mongo-init/
-          - init.js -> Create database, collection and insert data.
-        - .env -> PostgreSQL and MongoDB credentials
-        - docker-compose.yml -> Create the databases PostgreSQL and MongoDB and populate them with data. This is useful to run the code in an IDE.
-      - postman
-        - ch7.postman_collection.json -> Postman collection for chapter 7 to request the services. 
-      - ## 04-Configuration-Server - Managing configuration with Spring Cloud Config 
-        - 04-Configuration-Server/ 
-        - docker/
-          - postgresql/
-            - init.sql -> SQL DDL and DML
-          - mongo-init/
-            - init.js -> Create database, collection and insert data.
-          - .env -> PostgreSQL and MongoDB credentials
-          - docker-compose.yml -> Run an image of PostgreSQL and MongoDB, populate them with data, and run all microservices.
-        - online-auction-configuration -> Applications properties saved on GitHub
-        - service-discovery-services -> Service discovery (Eureka Server) code.
-        - configuration-services -> Configuration service's code.
-        - gateway-services -> Gateway services code.
-        - authentication-services -> Authentication services code.
-        - user-services -> User services code.
-        - product-services -> Product services code.   
-      - ## 05-Resiliency - Applying resilience with Resilience4J 
-        - 04-Configuration-Server/ 
-        - docker/
-          - postgresql/
-            - init.sql -> SQL DDL and DML
-          - mongo-init/
-            - init.js -> Create database, collection and insert data.
-          - .env -> PostgreSQL and MongoDB credentials
-          - docker-compose.yml -> Run an image of PostgreSQL and MongoDB, populate them with data, and run all microservices.
-        - service-discovery-services -> Service discovery (Eureka Server) code.
-        - configuration-services -> Configuration service's code.
-        - gateway-services -> Gateway services code.
-        - authentication-services -> Authentication services code.
-        - user-services -> User services code.
-        - product-services -> Product services code.
-      - docker-resources/
-        - postgresql/
-          - init.sql -> SQL DDL and DML
-        - mongo-init/
-          - init.js -> Create database, collection and insert data.
-        - .env -> PostgreSQL and MongoDB credentials
-        - docker-compose.yml -> Create the databases PostgreSQL and MongoDB and populate them with data. This is useful to run the code in an IDE.
-      - postman
-        - ch7.postman_collection.json -> Postman collection for chapter 7 to request the services.
-      - docker-resources/
-        - postgresql/
-          - init.sql -> SQL DDL and DML
-        - mongo-init/
-          - init.js -> Create database, collection and insert data.
-        - .env -> PostgreSQL and MongoDB credentials
-        - docker-compose.yml -> Create the databases PostgreSQL and MongoDB and populate them with data. This is useful to run the code in an IDE.
-      - postman
-        - ch7.postman_collection.json -> Postman collection for chapter 7 to request the services.      
+### ⚠️ Alerts
 
-  #### Prerequisites:
-      - Java 21
-      - Docker and Docker Compose
-      - Maven 3.9.9
+- If you encounter issues accessing `http://localhost:8080/v1/api/auth`, please use  
+`http://localhost:8072/authentication/v1/api/auth` instead.
+The services are running behind the gateway, and the correct route is exposed through the gateway service.
 
-  ## Instructions: 
-  ### To set up environment and run the project (Run the services without code):
+- 🧭 **Service Startup Order Matters**  
+  Run the services in the following order:
+  1. 🧩 `service-discovery-services`
+  2. 💪 `configuration-services`
+  3. 🌐 `gateway-services`
+  4. 📦 Other services like `authentication-services`, `user-services`, and `product-services`
 
-    1. Go the docker ch7/[01-Service-Discovery | 02-Load-Balancer | 03-Gateway | 04-Configuration-Server - 05-Resiliency]/docker folder
-    2. Execute the command: ```docker-compose up -d```
-    3. Go to the project's folder: postman and import the collection
-    4. Now, execute the request for the desired service.
-    5. To connect to the PostgreSQL: 
-        - Url user database: jdbc:postgresql://localhost:5432/user_db
-        - Url product database: jdbc:postgresql://localhost:5432/product_db
-        - User: auction_app
-        - Password: auction123
-    6. To connect to the MongoDB: mongodb://auction_app:auction123@localhost:27017/
-    authentication_db?authSource=admin
-        - User: auction_app
-        - Password: auction123
+- ⏱️ **Wait for Eureka**  
+  After starting services, wait up to **30 seconds** before making any requests.  
+  This ensures Eureka has synchronized its registry (due to default heartbeat/cache refresh intervals).
 
-  ### To set up environment and run the project (Run the services via IDE):
+---
 
-    1. Go the docker ch7/docker-resources folder
-    2. Execute the command: ```docker-compose up -d```
-    3. Open the microservices into your favorite IDE 
-       * RUN THE SERVICES IN THE FOLLOWING ORDER: 
-         * Discovery Services
-         * Configuration Services
-         * Gateway Services
-    4. Go to ch7/[01-Service-Discovery | 02-Load-Balancer | 03-Gateway | 04-Configuration-Server | 05-Resiliency] folder and for each microservices execute the command: ```mvn clean package``` and then  ```mvn spring-boot:run```
-         * To run more than one service instance, use the command: ``` mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=<port_number>"  ``` 
-    5. Go to the project's folder: postman and import the collection
-    6. Now, execute the request for the desired service.
-    5. To connect to the PostgreSQL: 
-        - Url user database: jdbc:postgresql://localhost:5432/user_db
-        - Url product database: jdbc:postgresql://localhost:5432/product_db
-        - User: auction_app
-        - Password: auction123
-    6. To connect to the MongoDB: mongodb://auction_app:auction123@localhost:27017/
-    authentication_db?authSource=admin
-        - User: auction_app
-        - Password: auction123
+### 📁 Folder Structure
 
-  ## References
-    - https://hub.docker.com/_/postgres
-    - https://hub.docker.com/_/mongo
-    - https://spring.io/guides/gs/service-registration-and-discovery
+```
+ch7/
+├── 01-Service-Discovery/              # Introduces Eureka for service discovery
+│   ├── service-discovery-services/    # Eureka Server
+│   ├── authentication-services/       # Basic authentication service registered with Eureka
+│   ├── user-services/                 # User service registered with Eureka
+│   └── product-services/              # Product service registered with Eureka
+├── 02-Load-Balancer/                  # Demonstrates load balancing with Spring Cloud LoadBalancer
+│   ├── service-discovery-services/    # Eureka Server
+│   ├── authentication-services/       # Authentication service with load balancing support
+│   ├── user-services/                 # User service with load balancing support
+│   └── product-services/              # Product service with load balancing support
+├── 03-Gateway/                        # Introduces routing via Spring Cloud Gateway
+│   ├── service-discovery-services/    # Eureka Server
+│   ├── gateway-services/              # Spring Cloud Gateway routing requests
+│   ├── authentication-services/       # Auth service behind the gateway
+│   ├── user-services/                 # User service 
+│   └── product-services/              # Product service
+├── 04-Configuration-Server/           # Centralized configuration with Spring Cloud Config
+│   ├── online-auction-configuration/  # Git-based configuration repository
+│   ├── service-discovery-services/    # Eureka Server
+│   ├── configuration-services/        # Spring Cloud Config Server
+│   ├── gateway-services/              # Gateway consuming config from config server
+│   ├── authentication-services/       # Auth service using centralized config
+│   ├── user-services/                 # User service using centralized config
+│   └── product-services/              # Product service using centralized config
+├── 05-Resiliency/                     # Applies resilience patterns with Resilience4J
+│   ├── service-discovery-services/    # Eureka Server
+│   ├── configuration-services/        # Config Server
+│   ├── gateway-services/              # Gateway 
+│   ├── authentication-services/       # Auth service with esilience support such as circuit breaker and timeouts.
+│   ├── user-services/                 # User service with resilience 
+│   └── product-services/              # Product service
+├── docker-resources/
+│   ├── postgresql/
+│   │   └── init.sql               # SQL DDL and DML scripts
+│   ├── mongo-init/
+│   │   └── init.js                # MongoDB: create DB, collections, insert data
+│   ├── .env                       # PostgreSQL and MongoDB credentials
+│   └── docker-compose.yml        # Spins up databases and populates data for IDE execution
+└── postman/                           # Postman collection to test all services
+    └── ch7.postman_collection.json
+```
+
+---
+
+### ⚙️ Prerequisites
+
+- ☕ Java 21  
+- 🐳 Docker & Docker Compose  
+- 🧰 Maven 3.9.9  
+
+---
+
+### 🚀 Setup Instructions
+
+#### 👨‍💻 Run Microservices via IDE
+
+1. Navigate to the Docker folder: `ch7/docker-resources`
+2. Start containers:
+   ```bash
+   docker-compose up -d
+   ```
+3. Open the microservices in your IDE  
+   **Run them in this order:**
+   - 🧩 Discovery Services
+   - 💪 Configuration Services
+   - 🌐 Gateway Services
+4. Go to the desired chapter folder:
+   - `01-Service-Discovery`
+   - `02-Load-Balancer`
+   - `03-Gateway`
+   - `04-Configuration-Server`
+   - `05-Resiliency`
+
+   For each service:
+   ```bash
+   mvn clean package
+   mvn spring-boot:run
+   ```
+   To run multiple instances (e.g., for load balancing):
+   ```bash
+   mvn spring-boot:run -Dspring-boot.run.arguments="--server.port=<port_number>"
+   ```
+5. Import the Postman collection from the `postman` folder  
+   📄 [Postman Import Documentation](https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-data/)
+6. Use Postman to send requests to your services
+
+---
+
+### 🔗 Database Connection Details
+
+- **PostgreSQL**
+  - 🛢️ User DB URL: `jdbc:postgresql://localhost:5432/user_db`
+  - 🛢️ Product DB URL: `jdbc:postgresql://localhost:5432/product_db`
+  - 👤 User: `auction_app`
+  - 🔑 Password: `auction123`
+
+- **MongoDB**
+  - 🌐 URL: `mongodb://auction_app:auction123@localhost:27017/authentication_db?authSource=admin`
+  - 👤 User: `auction_app`
+  - 🔑 Password: `auction123`
+
 
 - ## Chapter 8 : Event-Driven Architecture
   

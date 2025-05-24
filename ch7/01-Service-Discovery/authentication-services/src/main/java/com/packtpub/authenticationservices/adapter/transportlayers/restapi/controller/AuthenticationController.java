@@ -24,7 +24,7 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
         final Optional<String> token = generateTokenUseCase.execute(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         return ResponseEntity.ok(new AuthenticationResponse(token.get()));
     }
@@ -32,6 +32,7 @@ public class AuthenticationController {
     @GetMapping("/validate")
     public ResponseEntity<AuthenticationUserResponse> validateToken(@RequestParam String token) {
         final Authentication authentication = validateTokenUseCase.execute(token);
-        return authentication !=  null ? ResponseEntity.ok(new AuthenticationUserResponse(authentication.getUsername(), authentication.getRoles())) : null;
+        return ResponseEntity.ok(new AuthenticationUserResponse(authentication.getUsername(), authentication.getRoles()));
     }
+
 }

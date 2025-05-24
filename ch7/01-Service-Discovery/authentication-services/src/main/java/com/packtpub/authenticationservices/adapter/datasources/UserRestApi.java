@@ -22,12 +22,12 @@ public class UserRestApi implements UserRepository {
 
     @Override
     public List<String> getRolesByUsername(String username) {
-        ServiceInstance serviceInstance = discoveryClient.getInstances("USER-SERVICES").get(0);
+        ServiceInstance serviceInstance = discoveryClient.getInstances("USER-SERVICES").getFirst();
         RoleResponse result = restClient.get()
                 .uri(serviceInstance.getUri() + "/v1/users/{username}/roles", username)
                 .retrieve()
                 .body(RoleResponse.class);
-        return result.getRoles();
+        return result != null ? result.getRoles() : null;
     }
 
 }

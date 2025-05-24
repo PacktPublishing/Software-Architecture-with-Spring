@@ -10,4 +10,4 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 COPY --from=builder /app/target/gateway-services*.jar ./gateway-services.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "gateway-services.jar", "--spring.profiles.active=docker"]
+ENTRYPOINT ["java", "-jar", "gateway-services.jar"]

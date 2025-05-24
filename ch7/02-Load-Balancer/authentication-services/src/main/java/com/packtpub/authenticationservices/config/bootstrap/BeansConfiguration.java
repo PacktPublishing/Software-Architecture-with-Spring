@@ -16,20 +16,6 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class BeansConfiguration {
 
-
-    @Bean
-    public GenerateTokenUseCase generateTokenUseCase(UserRestApi userRestApi,
-                                                     AuthenticationManager authenticationManager,
-                                                     TokenJwt tokenJwt) {
-        AuthenticationManagerRepository authenticationManagerRepository = new AuthenticationManagerSecurity(authenticationManager);
-        return new GenerateTokenUseCase(authenticationManagerRepository, userRestApi, tokenJwt);
-    }
-
-    @Bean
-    public ValidateTokenUseCase validateTokenUseCase(TokenJwt tokenJwt) {
-        return new ValidateTokenUseCase(tokenJwt);
-    }
-
     @LoadBalanced
     @Bean
     public RestClient.Builder restClient(CustomLoadBalancerInterceptor customLoadBalancerInterceptor) {
@@ -37,6 +23,5 @@ public class BeansConfiguration {
                 .builder()
                 .requestInterceptor(customLoadBalancerInterceptor);
     }
-
 
 }
