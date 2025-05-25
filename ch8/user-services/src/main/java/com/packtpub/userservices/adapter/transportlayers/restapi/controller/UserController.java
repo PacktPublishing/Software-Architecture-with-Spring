@@ -1,10 +1,10 @@
 package com.packtpub.userservices.adapter.transportlayers.restapi.controller;
 
+import com.packtpub.userservices.adapter.transportlayers.restapi.dto.response.RoleResponse;
+import com.packtpub.userservices.adapter.transportlayers.restapi.dto.response.UserResponse;
 import com.packtpub.userservices.internal.entity.User;
 import com.packtpub.userservices.internal.usecases.GetUserRolesUseCase;
 import com.packtpub.userservices.internal.usecases.GetUsersUseCase;
-import com.packtpub.userservices.adapter.transportlayers.restapi.dto.response.RoleResponse;
-import com.packtpub.userservices.adapter.transportlayers.restapi.dto.response.UserResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,14 +12,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 

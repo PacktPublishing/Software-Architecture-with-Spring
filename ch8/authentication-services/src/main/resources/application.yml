@@ -1,3 +1,4 @@
+#  RESILIENCE SETTINGS
 resilience4j.circuitbreaker:
   instances:
     userServices:

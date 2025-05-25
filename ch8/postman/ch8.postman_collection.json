@@ -1,110 +1,12 @@
 {
 	"info": {
-		"_postman_id": "9dd0d24f-1203-4bc1-890b-9836a1248fb3",
+		"_postman_id": "19d8b47a-3b24-442b-88ba-15772e58c8c5",
 		"name": "ch8",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4179687",
-		"_collection_link": "https://gold-zodiac-469756.postman.co/workspace/SAWS6~dfe77395-c905-4e2b-93e1-a9acce6c5cc6/collection/4179687-9dd0d24f-1203-4bc1-890b-9836a1248fb3?action=share&source=collection_link&creator=4179687"
+		"_collection_link": "https://gold-zodiac-469756.postman.co/workspace/TEST-BOOK~1525faea-4736-4582-a1be-faefae051718/collection/4179687-19d8b47a-3b24-442b-88ba-15772e58c8c5?action=share&source=collection_link&creator=4179687"
 	},
 	"item": [
-		{
-			"name": "AUCTION - CREATE",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHd4YXVjdGlvbi5jb20iLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzIzMjM4NDEzLCJleHAiOjE3MjMzMjQ4MTN9.WP3gtKn5dNzMReI-CKlTmr9g-mNH6QPBnRMVRsyiKSs",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"description\": \"Leilão de carro\",\n  \"productId\": 1,\n  \"minBid\": 1,\n  \"maxBid\": 2,\n  \"active\": true\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8072/bid-services/v1/auctions",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8072",
-					"path": [
-						"bid-services",
-						"v1",
-						"auctions"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "BID - CREATE",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDI3NzcwMDcsImV4cCI6MTc0Mjg2MzQwN30.-7TuHcoiupzl0Ol1wlYXR0W1sC_zFZezxueYBBA0ttA",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MjM1MDc5MTIsImV4cCI6MTcyMzU5NDMxMn0.mAypOvyMxev1EBWB6WCUP85tXqrih66fJ8C6g-4Gx6w",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"auctionId\": \"1\",\n  \"userId\": 1,\n  \"amount\": 600.00\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8072/bid-services/v1/bids",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8072",
-					"path": [
-						"bid-services",
-						"v1",
-						"bids"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "AUTH - LOGIN ADMIN",
 			"request": {
@@ -178,6 +80,114 @@
 			"response": []
 		},
 		{
+			"name": "BID - CREATE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgyMDI1MTEsImV4cCI6MTc0ODI4ODkxMX0.ezrP9SsflNpsLWNldRg1Y9e2k5Ec5VKdCsHlWFa9P2WIX4udTjkR2amtqaRDan7Iww04DhHunJ1A35zNWN072g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MjM1MDc5MTIsImV4cCI6MTcyMzU5NDMxMn0.mAypOvyMxev1EBWB6WCUP85tXqrih66fJ8C6g-4Gx6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"auctionId\": \"1\",\n  \"userId\": 1,\n  \"amount\": 600.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/bid-services/v1/bids",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"bid-services",
+						"v1",
+						"bids"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUCTION - CREATE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgyMDI1MTEsImV4cCI6MTc0ODI4ODkxMX0.ezrP9SsflNpsLWNldRg1Y9e2k5Ec5VKdCsHlWFa9P2WIX4udTjkR2amtqaRDan7Iww04DhHunJ1A35zNWN072g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHd4YXVjdGlvbi5jb20iLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzIzMjM4NDEzLCJleHAiOjE3MjMzMjQ4MTN9.WP3gtKn5dNzMReI-CKlTmr9g-mNH6QPBnRMVRsyiKSs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"Leilão de carro\",\n  \"productId\": 1,\n  \"minBid\": 1,\n  \"maxBid\": 2,\n  \"active\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/bid-services/v1/auctions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"bid-services",
+						"v1",
+						"auctions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "USERS - GET ALL",
 			"request": {
 				"auth": {
@@ -185,7 +195,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDAxNzA0NTksImV4cCI6MTc0MDI1Njg1OX0.y0gUxfbkL3Snw7Dt2J2F9KT-CsiTZFcKaLpp_KNouxU",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgyMDI1MTEsImV4cCI6MTc0ODI4ODkxMX0.ezrP9SsflNpsLWNldRg1Y9e2k5Ec5VKdCsHlWFa9P2WIX4udTjkR2amtqaRDan7Iww04DhHunJ1A35zNWN072g",
 							"type": "string"
 						}
 					]
@@ -222,7 +232,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDAxNzA0NTksImV4cCI6MTc0MDI1Njg1OX0.y0gUxfbkL3Snw7Dt2J2F9KT-CsiTZFcKaLpp_KNouxU",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgyMDI1MTEsImV4cCI6MTc0ODI4ODkxMX0.ezrP9SsflNpsLWNldRg1Y9e2k5Ec5VKdCsHlWFa9P2WIX4udTjkR2amtqaRDan7Iww04DhHunJ1A35zNWN072g",
 							"type": "string"
 						}
 					]
@@ -256,14 +266,7 @@
 			"name": "USERS - GET-ROLES",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHd4YXVjdGlvbi5jb20iLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzMzNzAxMjk0LCJleHAiOjE3MzM3ODc2OTR9.Wst4GyCoC-1jgjh5y0OeG6BCU5BdW6e20APvh408yk0",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -291,7 +294,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8072/authentication-services/v1/api/auth/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDAxNzA0NTksImV4cCI6MTc0MDI1Njg1OX0.y0gUxfbkL3Snw7Dt2J2F9KT-CsiTZFcKaLpp_KNouxU",
+					"raw": "http://localhost:8072/authentication-services/v1/api/auth/validate?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoidXNlckB3eGF1Y3Rpb24uY29tIiwiaWF0IjoxNzQ4MjAyNTE5LCJleHAiOjE3NDgyODg5MTl9.XZWfJpRKv57fjiBXimROakWlXG3gew_Dq2jHLbNjh4_weJTwLFEHsFDa_H6ZQ2tZLsHCKqk1gREX2TklkTCYjA",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -307,7 +310,7 @@
 					"query": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3NDAxNzA0NTksImV4cCI6MTc0MDI1Njg1OX0.y0gUxfbkL3Snw7Dt2J2F9KT-CsiTZFcKaLpp_KNouxU"
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoidXNlckB3eGF1Y3Rpb24uY29tIiwiaWF0IjoxNzQ4MjAyNTE5LCJleHAiOjE3NDgyODg5MTl9.XZWfJpRKv57fjiBXimROakWlXG3gew_Dq2jHLbNjh4_weJTwLFEHsFDa_H6ZQ2tZLsHCKqk1gREX2TklkTCYjA"
 						}
 					]
 				}
