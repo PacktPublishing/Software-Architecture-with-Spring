@@ -31,6 +31,9 @@ This book explores the journey of building robust, scalable, and maintainable ap
 - [Compass](https://www.mongodb.com/try/download/compass) – MongoDB GUI
 - [DataGrip](https://www.jetbrains.com/datagrip/download) – JetBrains SQL IDE
 
+### 📬 Kafka Client
+- 🛠️ [Kafka Tool](https://kafkatool.com/download.html) – GUI for managing and browsing Kafka clusters 
+
 ### 🔌 API Testing Tools
 - [Postman](https://www.postman.com/downloads/) – API platform for building and testing APIs
 
