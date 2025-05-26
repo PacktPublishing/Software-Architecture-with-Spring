@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserItemProcessor implements ItemProcessor<UserDto, User> {
 
-    public User process(UserDto userDto) throws Exception {
+    public User process(UserDto userDto) {
         return User.builder()
                 .id(userDto.getId())
                 .name(userDto.getName())

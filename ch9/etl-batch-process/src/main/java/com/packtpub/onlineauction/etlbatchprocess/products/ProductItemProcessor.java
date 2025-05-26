@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductItemProcessor implements ItemProcessor<ProductDto, Product> {
 
-    public Product process(ProductDto productDto) throws Exception {
+    public Product process(ProductDto productDto) {
         return Product.builder()
                 .id(productDto.getId())
                 .name(productDto.getName())

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class BidItemProcessor implements ItemProcessor<BidDto, Bid> {
 
     @Override
-    public Bid process(BidDto bidDto) throws Exception {
+    public Bid process(BidDto bidDto) {
       return Bid.builder()
                 .originalId(bidDto.getOriginalId())
                 .amount(bidDto.getAmount())

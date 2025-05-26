@@ -4,9 +4,6 @@ import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class UserFieldSetMapper implements FieldSetMapper<UserDto> {
 
     @Override

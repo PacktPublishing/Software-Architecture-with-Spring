@@ -2,9 +2,6 @@ package com.packtpub.onlineauction.etlbatchprocess.users;
 
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
