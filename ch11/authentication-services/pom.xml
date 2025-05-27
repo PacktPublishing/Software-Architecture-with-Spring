@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>3.4.5</version>
         <relativePath/>
     </parent>
     <groupId>com.packtpub.authenticationservices</groupId>
@@ -17,6 +17,17 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+
+<!-- Condiguration Client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
 
         <!-- Dev Tools -->
         <dependency>
@@ -56,7 +67,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
+            <version>2.8.8</version>
         </dependency>
 
         <!-- JWT -->
@@ -88,6 +99,7 @@
             <version>1.15</version>
         </dependency>
 
+        <!-- RESILIENCE -->
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring-boot3</artifactId>
@@ -103,10 +115,6 @@
             <artifactId>resilience4j-ratelimiter</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>
 
         <!-- Tests -->
         <dependency>
@@ -150,8 +158,8 @@
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-parent</artifactId>
-                <version>2023.0.2</version>
+                <artifactId>spring-cloud-dependencies/artifactId>
+                <version>2024.0.1<</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -190,13 +198,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-<!--                <configuration>-->
-<!--                    <jvmArguments>-javaagent:/Users/wanderson/newrelic/newrelic.jar</jvmArguments>-->
-<!--                    <systemPropertyVariables>-->
-<!--                        <newrelic.config.file>/Users/wanderson/newrelic/newrelic-authentication-services.yml-->
-<!--                        </newrelic.config.file>-->
-<!--                    </systemPropertyVariables>-->
-<!--                </configuration>-->
+                <!-- UNCOMMENT AND SET UP WITH YOUR LOCATION TO ENABLE NEW RELIC -->
+                <configuration>
+                    <jvmArguments>-javaagent:/Users/wanderson/newrelic/newrelic.jar</jvmArguments>
+                    <systemPropertyVariables>
+                        <newrelic.config.file>/Users/wanderson/newrelic/newrelic-authentication-services.yml
+                        </newrelic.config.file>
+                    </systemPropertyVariables>
+                </configuration>
+                -->
             </plugin>
         </plugins>
     </build>

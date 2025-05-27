@@ -33,9 +33,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
-        final boolean isTokenValid = validateTokenUseCase.execute(token);
-        return ResponseEntity.ok(isTokenValid);
-
+    public ResponseEntity<AuthenticationUserResponse> validateToken(@RequestParam String token) {
+        final Authentication authentication = validateTokenUseCase.execute(token);
+        return ResponseEntity.ok(new AuthenticationUserResponse(authentication.getUsername(), authentication.getRoles()));
     }
+
 }

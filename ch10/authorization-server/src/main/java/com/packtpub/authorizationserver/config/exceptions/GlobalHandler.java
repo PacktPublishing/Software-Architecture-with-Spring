@@ -18,8 +18,8 @@ import java.security.SignatureException;
 public class GlobalHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<BusinessExceptionResponse> handleException(BusinessException e){
-        BusinessExceptionResponse response = new BusinessExceptionResponse(
+    public ResponseEntity<BusinessExceptionResponse<Object>> handleException(BusinessException e){
+        BusinessExceptionResponse<Object>response = new BusinessExceptionResponse<>(
                 e.getCode(),
                 null,
                 e.getLocalizedMessage()
