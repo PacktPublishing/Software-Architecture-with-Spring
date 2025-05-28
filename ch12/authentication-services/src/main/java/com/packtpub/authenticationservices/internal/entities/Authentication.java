@@ -22,6 +22,11 @@ public class Authentication {
     public Authentication() {
     }
 
+    public Authentication( String username,  List<String> roles) {
+        this.username = username;
+        this.roles = roles;
+    }
+
     public Authentication(Long id, String username, String password, boolean accountNonExpired, boolean isEnabled, boolean accountNonLocked, boolean credentialsNonExpired, List<String> roles) {
         this.id = id;
         this.username = username;
@@ -33,14 +38,7 @@ public class Authentication {
         this.roles = roles;
     }
 
-    public Authentication(String username, String password, List<String> roles, boolean isEnabled, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-        this.isEnabled = isEnabled;
-        this.accountNonExpired = accountNonExpired;
-        this.accountNonLocked = accountNonLocked;
-        this.credentialsNonExpired = credentialsNonExpired;
+    public Authentication(String username, String password, List<String> roles, boolean enabled, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired) {
     }
 
     public Long getId() {

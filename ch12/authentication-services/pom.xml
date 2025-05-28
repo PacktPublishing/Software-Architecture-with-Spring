@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>3.4.5</version>
         <relativePath/>
     </parent>
     <groupId>com.packtpub.authenticationservices</groupId>
@@ -17,6 +17,17 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+
+        <!-- Condiguration Client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
 
         <!-- Dev Tools -->
         <dependency>
@@ -56,7 +67,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
+            <version>2.8.8</version>
         </dependency>
 
         <!-- JWT -->
@@ -88,6 +99,7 @@
             <version>1.15</version>
         </dependency>
 
+        <!-- RESILIENCE -->
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring-boot3</artifactId>
@@ -103,10 +115,6 @@
             <artifactId>resilience4j-ratelimiter</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
-        </dependency>
 
         <!-- Tests -->
         <dependency>
@@ -149,13 +157,6 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- Contract Testing -->
-<!--        <dependency>-->
-<!--            <groupId>au.com.dius.pact</groupId>-->
-<!--            <artifactId>consumer</artifactId>-->
-<!--            <version>4.6.15</version>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
@@ -172,15 +173,15 @@
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-parent</artifactId>
-                <version>2023.0.2</version>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2024.0.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>io.opentelemetry</groupId>
                 <artifactId>opentelemetry-bom</artifactId>
-                <version>1.43.0</version>
+                <version>1.47.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -212,6 +213,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- UNCOMMENT AND SET UP TO USE NEW RELIC -->
 <!--                <configuration>-->
 <!--                    <jvmArguments>-javaagent:/Users/wanderson/newrelic/newrelic.jar</jvmArguments>-->
 <!--                    <systemPropertyVariables>-->

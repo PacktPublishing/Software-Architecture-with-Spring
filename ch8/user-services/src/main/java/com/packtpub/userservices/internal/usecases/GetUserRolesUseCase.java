@@ -18,7 +18,7 @@ public class GetUserRolesUseCase {
     public List<String> execute(String username) {
         List<String> roles = new ArrayList<>();
         Optional<User> user = userRepository.findByUsername(username);
-        user.ifPresent(value -> value.getRoles().forEach(role -> roles.add(role.getName())));
+        user.ifPresent(usr -> usr.getRoles().forEach(role -> roles.add(role.getName())));
         return roles;
     }
 

@@ -37,8 +37,12 @@ This book explores the journey of building robust, scalable, and maintainable ap
 ### 🔌 API Testing Tools
 - [Postman](https://www.postman.com/downloads/) – API platform for building and testing APIs
 
+### 🧪 Performance Testing Tools
+- 🚀 [Apache JMeter](https://jmeter.apache.org/download_jmeter.cgi) – Load testing tool for analyzing and measuring performance
+
 ## 🐳 Containerization
 - [Docker](https://www.docker.com/get-started/) – Container platform for building and running applications
+
 
 ### Sample Code
 
@@ -773,60 +777,92 @@ ch11/
   - 👤 User: `auction_app`
   - 🔑 Password: `auction123`
 
+## ✅ Chapter 12: Testing
+### ⚠️ Alerts
+The `user-services` and `auction-services` contain the tests presented in Chapter 12.
 
-- ## Chapter 12 : Testing
-  
-    - ch12:
-      - docker-resources/
-        - databases/
-          - postgresql/
-            - init.sql -> SQL DDL and DML
-          - mongo-init/
-            - init.js -> Create database, collection and insert data.
-          - .env -> PostgreSQL and MongoDB credentials
-          - docker-compose.yml -> Run images of PostgreSQL and MongoDB, populate them with data, and execute both databases.
-        - observability/
-          - docker-compose.yml -> Run images of Elasticsearch, Logstash, Kibana, Opentelemetry Collector and Zipkin.
-      -JMeter/
-        - Thread Group.jmx -> This is the configuration file for the stress test. If you wish, you can import it into JMeter instead of following the steps.
-      - online-auction-configuration -> Applications properties saved on GitHub
-      - service-discovery-services -> Service discovery (Eureka Server) code.
-      - configuration-services -> Configuration service's code.
-      - gateway-services -> Gateway services code.
-      - authentication-services -> Authentication services code.
-      - user-services -> User services code.The unit and integration tests lie here.
-      - product-services -> Product services code.
-      
 
-  #### Prerequisites:
-      - Java 21
-      - Docker and Docker Compose
-      - Maven 3.9.9
-      - Apache JMeter 5.6.3
+### 📁 Folder Structure
 
-  ## Instructions: *** IT IS NEEDED TO RUN THE STRESS TEST ONLY:
-    ### To set up environment and run the project (Run the services via IDE) 
-    1. Go the docker ch12/docker-resources folder.
-    2. Execute the command: ```docker-compose up -d``` to run the databases.
-    3. Go the docker ch11/docker-resources/observability folder.
-    4. Execute the command: ```docker-compose up -d``` to run the Elasticsearch, Logstash, Kibana, Opentelemetry Collector and Zipkin.
-    4. Go to ch12 folder and open the microservices into your favorite IDE.
-       * RUN THE SERVICES IN THE FOLLOWING ORDER: 
-         * service-discovery-services
-         * configuration-services
-         * gateway-services
-         * authentication-services
-         * user-services
-         * product-services (optional)
-    5. To connect to the PostgreSQL: 
-        - Url user database: jdbc:postgresql://localhost:5432/user_db
-        - Url product database: jdbc:postgresql://localhost:5432/product_db
-        - User: auction_app
-        - Password: auction123
-    6. To connect to the MongoDB: mongodb://auction_app:auction123@localhost:27017/
-    authentication_db?authSource=admin
-        - User: auction_app
-        - Password: auction123 
+```
+ch12/
+├── docker-resources/
+│   ├── databases/
+│   │   ├── postgresql/
+│   │   │   └── init.sql               # SQL DDL and DML scripts
+│   │   ├── mongo-init/
+│   │   │   └── init.js                # MongoDB: create DB, collections, insert data
+│   │   ├── .env                       # PostgreSQL and MongoDB credentials
+│   │   └── docker-compose.yml        # Runs PostgreSQL and MongoDB with populated data
+│   ├── observability/
+│   │   └── docker-compose.yml        # Runs Elasticsearch, Logstash, Kibana, OpenTelemetry Collector, and Zipkin
+├── JMeter/
+│   └── Thread Group.jmx              # JMeter configuration file for stress testing
+├── postman/
+│   └── ch12.postman_collection.json  # Postman collection for chapter 12
+├── service-discovery-services/       # Eureka server
+├── configuration-services/           # Spring Cloud Config server
+├── gateway-services/                 # API gateway
+├── authentication-services/          # Auth microservice
+├── user-services/                    # User microservice (includes unit and integration tests)
+├── product-services/                 # Product microservice
+└── auction-services/                 # Presents the Unit tests using MOCK and SPY
+```
+
+---
+
+### ⚙️ Prerequisites
+
+- ☕ Java 21  
+- 🐳 Docker & Docker Compose  
+- 🧰 Maven 3.9.9  
+- 🧪 [Apache JMeter 5.6.3](https://jmeter.apache.org/download_jmeter.cgi)  
+
+---
+
+### 🚀 Instructions (for running stress tests)
+
+#### ⚙️ Run Services via IDE
+
+1. Navigate to the databases folder: ch12/docker-resources/databases
+   ```bash
+   docker-compose up -d
+   ```
+
+2. Navigate to the observability folder: ch12/docker-resources/observability
+   ```bash
+   docker-compose up -d
+   ```
+
+3. Open the microservices in your IDE from the `ch12` folder.
+
+   🔁 **Run the services in the following order**:
+   - `service-discovery-services`
+   - `configuration-services`
+   - `gateway-services`
+   - `authentication-services`
+   - `user-services`
+   - `product-services` (optional)
+4. For each service execute:
+   ```bash
+   mvn clean package
+   mvn spring-boot:run
+   ```
+---
+
+### 🔗 Database Connection Details
+
+- **PostgreSQL**
+  - 🛢️ User DB URL: `jdbc:postgresql://localhost:5432/user_db`
+  - 🛢️ Product DB URL: `jdbc:postgresql://localhost:5432/product_db`
+  - 👤 User: `auction_app`
+  - 🔑 Password: `auction123`
+
+- **MongoDB**
+  - 🌐 URL: `mongodb://auction_app:auction123@localhost:27017/authentication_db?authSource=admin`
+  - 👤 User: `auction_app`
+  - 🔑 Password: `auction123`
+
 
 ### 👨‍💼 Who This Book is For
 

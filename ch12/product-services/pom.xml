@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.packtpub.productservices</groupId>
@@ -49,12 +49,22 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
+		<!-- Condiguration Client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
 
         <!-- OPEN API -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.5.0</version>
+            <version>2.8.8</version>
         </dependency>
 
         <!-- JWT -->
@@ -83,6 +93,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+		<!-- Base 64 codec -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
         </dependency>
 
         <!-- Tests -->
@@ -128,8 +145,8 @@
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-parent</artifactId>
-                <version>2023.0.2</version>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2024.0.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -168,12 +185,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
+                <!-- UNCOMMENT AND SET UP WITH YOUR LOCATION TO ENABLE NEW RELIC -->
+                <!-- <configuration>
                     <jvmArguments>-javaagent:/Users/wanderson/newrelic/newrelic.jar</jvmArguments>
                     <systemPropertyVariables>
                         <newrelic.config.file>/Users/wanderson/newrelic/newrelic-product-services.yml</newrelic.config.file>
                     </systemPropertyVariables>
-                </configuration>
+                </configuration> -->
             </plugin>
         </plugins>
     </build>

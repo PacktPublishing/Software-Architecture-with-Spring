@@ -187,7 +187,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <!-- UNCOMMENT AND SET UP WITH YOUR LOCATION TO ENABLE NEW RELIC -->
-                <configuration>
+                <!-- <configuration>
                     <jvmArguments>-javaagent:/Users/wanderson/newrelic/newrelic.jar</jvmArguments>
                     <systemPropertyVariables>
                         <newrelic.config.file>/Users/wanderson/newrelic/newrelic-product-services.yml</newrelic.config.file>
