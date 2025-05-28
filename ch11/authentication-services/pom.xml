@@ -18,7 +18,7 @@
     </properties>
     <dependencies>
 
-<!-- Condiguration Client -->
+		<!-- Condiguration Client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
@@ -158,7 +158,7 @@
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies/artifactId>
+                <artifactId>spring-cloud-dependencies</artifactId>
                 <version>2024.0.1</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -199,7 +199,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <!-- UNCOMMENT AND SET UP  TO USE NEW RELIC -->
-                <configuration>
+               <!-- <configuration>
                     <jvmArguments>-javaagent:/Users/wanderson/newrelic/newrelic.jar</jvmArguments>
                     <systemPropertyVariables>
                         <newrelic.config.file>/Users/wanderson/newrelic/newrelic-authentication-services.yml

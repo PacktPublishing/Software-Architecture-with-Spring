@@ -2,6 +2,8 @@ package com.packtpub.authenticationservices.adapter.transportlayers.restapi.cont
 
 import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.request.AuthenticationRequest;
 import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.response.AuthenticationResponse;
+import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.response.AuthenticationUserResponse;
+import com.packtpub.authenticationservices.internal.entities.Authentication;
 import com.packtpub.authenticationservices.internal.usecases.GenerateTokenUseCase;
 import com.packtpub.authenticationservices.internal.usecases.ValidateTokenUseCase;
 import lombok.extern.slf4j.Slf4j;

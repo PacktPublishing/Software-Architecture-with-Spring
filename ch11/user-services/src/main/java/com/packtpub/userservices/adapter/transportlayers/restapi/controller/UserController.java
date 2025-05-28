@@ -45,8 +45,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{username}/roles")
-    public ResponseEntity<RoleResponse> getUserRoles(@PathVariable("username") String username, @RequestHeader("traceparent") String traceparent) throws TimeoutException, InterruptedException {
-        log.info("Received traceparent: {}", traceparent);  // Verify trace propagation
+    public ResponseEntity<RoleResponse> getUserRoles(@PathVariable("username") String username) throws TimeoutException, InterruptedException {
 
         // Enable to test bulkhead
         // Thread.sleep(20000);

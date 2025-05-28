@@ -1,6 +1,7 @@
 package com.packtpub.authenticationservices.config.bootstrap;
 
 import com.packtpub.authenticationservices.config.logging.CustomLoadBalancerInterceptor;
+import io.micrometer.observation.ObservationRegistry;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,10 +12,11 @@ public class BeansConfiguration {
 
     @LoadBalanced
     @Bean
-    public RestClient.Builder restClient(CustomLoadBalancerInterceptor customLoadBalancerInterceptor) {
+    public RestClient.Builder restClient(CustomLoadBalancerInterceptor customLoadBalancerInterceptor, ObservationRegistry observationRegistry) {
         return RestClient
                 .builder()
-                .requestInterceptor(customLoadBalancerInterceptor);
+                .requestInterceptor(customLoadBalancerInterceptor)
+                .observationRegistry(observationRegistry);
     }
 
 }

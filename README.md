@@ -697,6 +697,19 @@ ch10/
 
 ## 📊 Chapter 11: Observability
 
+### ⚠️ Alerts
+Adding the `ObservationRegistry` to the `RestClient` is essential for enabling distributed tracing. It ensures that Spring propagates the trace context across microservices, resulting in connected and coherent traces in observability tools. The BeansConfiguration class was updated accordingly, as shown below.
+```java
+@LoadBalanced
+@Bean
+public RestClient.Builder restClient(CustomLoadBalancerInterceptor customLoadBalancerInterceptor, ObservationRegistry observationRegistry) {
+    return RestClient
+            .builder()
+            .requestInterceptor(customLoadBalancerInterceptor)
+            .observationRegistry(observationRegistry);
+}
+```
+
 ### 📁 Folder Structure
 
 ```
