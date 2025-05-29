@@ -3,7 +3,6 @@ package com.packtpub.productservices.adapter.datasources.product;
 import com.packtpub.productservices.internal.entity.Product;
 import com.packtpub.productservices.internal.exception.NotFoundException;
 import com.packtpub.productservices.internal.repositories.ProductRepository;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.Base64;
 import java.util.List;

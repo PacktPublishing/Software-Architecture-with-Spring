@@ -1,14 +1,11 @@
-server:
-  port: 8072
-
 spring:
   application:
     name: gateway-services
   cloud:
     gateway:
       discovery.locator:
-          enabled: true
-          lower-case-service-id: true
+        enabled: true
+        lower-case-service-id: true
       routes:
         - id: auth
           uri: lb://authentication-services
@@ -16,7 +13,6 @@ spring:
             - Path=/authentication/**
           filters:
             - RewritePath=/authentication/(?<path>.*), /$\{path}
-#            - CustomHeaderFilter
 eureka:
   instance:
     preferIpAddress: true
@@ -34,6 +30,8 @@ management:
   endpoint:
     gateway:
       enabled: true
+  health:
+    show-details: always
 
 logging:
   level:

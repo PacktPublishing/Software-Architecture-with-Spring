@@ -2,15 +2,14 @@ package com.packtpub.authenticationservices.adapter.transportlayers.restapi.cont
 
 import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.request.AuthenticationRequest;
 import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.response.AuthenticationResponse;
+import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.response.AuthenticationUserResponse;
+import com.packtpub.authenticationservices.internal.entities.Authentication;
 import com.packtpub.authenticationservices.internal.usecases.GenerateTokenUseCase;
 import com.packtpub.authenticationservices.internal.usecases.ValidateTokenUseCase;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 @RequestMapping("/v1/api/auth")
 @RestController
@@ -35,9 +34,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
-        final boolean isTokenValid = validateTokenUseCase.execute(token);
-        return ResponseEntity.ok(isTokenValid);
-
+    public ResponseEntity<AuthenticationUserResponse> validateToken(@RequestParam String token) {
+        final Authentication authentication = validateTokenUseCase.execute(token);
+        return ResponseEntity.ok(new AuthenticationUserResponse(authentication.getUsername(), authentication.getRoles()));
     }
+
 }

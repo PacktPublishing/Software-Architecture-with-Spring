@@ -15,7 +15,7 @@ public class CacheInspector implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Cache cache = cacheManager.getCache("products");
         if (cache != null) {
             System.out.println("Cache initialized successfully!");

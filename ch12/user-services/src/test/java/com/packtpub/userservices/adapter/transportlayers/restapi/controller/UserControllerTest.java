@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
@@ -30,13 +30,22 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    /**
+     * Since Spring Boot 3.4.0, both @MockBean and @MockBeans have been deprecated
+     * in favor of the new @MockitoBean annotation, which should be used going forward.
+     * This change was motivated to clarify the test library in use.
+     * Many developers were confused about whether @MockBean was Spring’s own mocking
+     * mechanism or tied to Mockito — so Spring 3.4 made the
+     * dependency explicit by introducing @MockitoBean.
+     */
+
+    @MockitoBean
     private GetUsersUseCase getUsersUseCase;
 
-    @MockBean
+    @MockitoBean
     private AuthenticationRestApi authenticationRestApi;
 
-    @MockBean
+    @MockitoBean
     private GetUserRolesUseCase getUserRolesUseCase;
 
     @Test

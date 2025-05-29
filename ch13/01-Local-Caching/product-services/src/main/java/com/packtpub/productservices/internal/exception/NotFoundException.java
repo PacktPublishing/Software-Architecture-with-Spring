@@ -1,17 +1,13 @@
 package com.packtpub.productservices.internal.exception;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ResponseStatus(HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException{
 
+    public NotFoundException(String message) {
+        super(message);
+    }
+
     private String message;
+    public String getMessage() {return message;}
+    public void setMessage(String message) {this.message = message;}
 
 }

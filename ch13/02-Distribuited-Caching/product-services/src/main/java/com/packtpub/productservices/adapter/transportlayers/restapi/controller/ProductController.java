@@ -3,9 +3,6 @@ package com.packtpub.productservices.adapter.transportlayers.restapi.controller;
 import com.packtpub.productservices.adapter.datasources.product.service.ProductService;
 import com.packtpub.productservices.adapter.transportlayers.restapi.dto.request.ProductRequest;
 import com.packtpub.productservices.adapter.transportlayers.restapi.dto.response.ProductResponse;
-import com.packtpub.productservices.internal.entity.Product;
-import com.packtpub.productservices.internal.usecases.GetProductsByIdUseCase;
-import com.packtpub.productservices.internal.usecases.GetProductsUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -17,12 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,13 +35,13 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductResponse>> getProducts() {
         List<ProductResponse> productResponses = productService.getAllProducts();
-        return ! productResponses.isEmpty() ? new ResponseEntity<>(productResponses, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return !productResponses.isEmpty() ? new ResponseEntity<>(productResponses, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ProductResponse getProductsById(@PathVariable  Long id) {
-        return productService.getProductById(id);
+    public ResponseEntity<ProductResponse> getProductsById(@PathVariable  Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

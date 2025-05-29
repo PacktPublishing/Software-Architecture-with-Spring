@@ -11,9 +11,6 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.ReactiveOAuth2UserService;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
@@ -34,12 +31,9 @@ public class SecurityConfiguration {
                         .pathMatchers("/actuator/**").hasRole("ADMIN")
                         .anyExchange().authenticated()
                 )
-                .oauth2Login(oauth2 -> oauth2
-                        .authenticationSuccessHandler((webFilterExchange, authentication) -> {
-                            return webFilterExchange.getChain().filter(webFilterExchange.getExchange());
-                        })
-                )
-                .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
+//                .sessionManagement(session -> session
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationManager(reactiveAuthenticationManager());
 
         return http.build();
     }
@@ -50,11 +44,6 @@ public class SecurityConfiguration {
                 new UserDetailsRepositoryReactiveAuthenticationManager(reactiveUserDetailsService);
         authenticationManager.setPasswordEncoder(passwordEncoder());
         return authenticationManager;
-    }
-
-    @Bean
-    public ReactiveOAuth2UserService<OAuth2UserRequest, OAuth2User> reactiveOAuth2UserService() {
-        return new CustomOAuth2UserService();
     }
 
     @Bean

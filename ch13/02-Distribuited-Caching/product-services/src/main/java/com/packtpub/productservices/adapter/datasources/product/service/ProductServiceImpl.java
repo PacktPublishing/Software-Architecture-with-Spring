@@ -3,6 +3,7 @@ package com.packtpub.productservices.adapter.datasources.product.service;
 import com.packtpub.productservices.adapter.transportlayers.restapi.dto.request.ProductRequest;
 import com.packtpub.productservices.adapter.transportlayers.restapi.dto.response.ProductResponse;
 import com.packtpub.productservices.internal.entity.Product;
+import com.packtpub.productservices.internal.exception.NotFoundException;
 import com.packtpub.productservices.internal.usecases.AddProductUseCase;
 import com.packtpub.productservices.internal.usecases.GetProductsByIdUseCase;
 import com.packtpub.productservices.internal.usecases.GetProductsUseCase;
@@ -10,6 +11,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,12 +30,31 @@ public class ProductServiceImpl implements ProductService {
     @Cacheable("products")
     public List<ProductResponse>    getAllProducts() {
         List<Product> products = getProductsUseCase.execute();
-        return products.stream().map(n -> new ProductResponse(n.getId(), n.getName(), n.getDescription(), n.getUserId(), n.getPhotoBase64())).toList();
+
+        List<ProductResponse> productResponses = new ArrayList<>();
+
+        for (Product product : products) {
+            ProductResponse productResponse = new ProductResponse();
+            productResponse.setId(product.getId());
+            productResponse.setName(product.getName());
+            productResponse.setDescription(product.getDescription());
+            productResponse.setUserId(product.getUserId());
+            productResponse.setPhotoBase64(product.getPhotoBase64());
+            productResponses.add(productResponse);
+        }
+
+        return productResponses;
+
     }
 
     @Cacheable("productsById")
     public ProductResponse getProductById(Long id) {
         Product product = getProductsByIdUseCase.execute(id);
+
+        if (product == null) {
+            throw new NotFoundException("Product with id " + id + " not found");
+        }
+
         return new ProductResponse(product.getId(),
                 product.getName(), product.getDescription(),
                 product.getUserId(), product.getPhotoBase64());

@@ -12,8 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequest {
-    @NotNull(message = "ID is required")
-    private Integer id;
 
     @NotBlank(message = "Name is required")
     private String name;

@@ -10,42 +10,45 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
 public class UserRestApi implements UserRepository {
 
-    private final RestClient.Builder restClient;
+    private final RestClient restClient;
 
-    public UserRestApi(RestClient.Builder restClient) {
-        this.restClient = restClient;
+    public UserRestApi(RestClient.Builder builder) {
+        this.restClient = builder.build();
     }
 
-    // Uncomment when testing only circuit breaker
-    // @CircuitBreaker(name = "userServices")
+    // Only circuit breaker
+    //@CircuitBreaker(name = "userServices")
 
-    // Uncomment when testing circuit breaker and fallback
+    // Circuit breaker with fallback
     @CircuitBreaker(name = "userServices", fallbackMethod = "getRolesFromCache")
 
-    // Uncomment when testing retry
-    // @Retry(name = "userServicesRetry", fallbackMethod = "getRolesFromCache")
+    // Retry
+    @Retry(name = "userServicesRetry", fallbackMethod = "getRolesFromCache")
 
-    // Uncomment when testing rate limiter
-    //@RateLimiter(name = "userServicesRateLimiter")
+    // Rate limiter
+    @RateLimiter(name = "userServicesRateLimiter")
 
-    // Uncomment for testing Bulkhead
-    //@Bulkhead(name = "userServicesBulkhead", type = Bulkhead.Type.SEMAPHORE)
-    @Override
+    // Bulkhead
+    @Bulkhead(name = "userServicesBulkhead", type = Bulkhead.Type.SEMAPHORE)
     public List<String> getRolesByUsername(String username) {
-        
-        RoleResponse result = restClient.build()
+        RoleResponse result = restClient
                 .get()
-                .uri(URI.create("http://USER-SERVICES/v1/users/" + username + "/roles"))
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host("USER-SERVICES")
+                        .path("/v1/users/{username}/roles")
+                        .build(Map.of("username", username)))
                 .retrieve()
                 .body(RoleResponse.class);
         return result.getRoles();
+
     }
 
     public List<String> getRolesFromCache(String username, Throwable throwable) {

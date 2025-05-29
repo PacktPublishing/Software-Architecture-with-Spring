@@ -1,17 +1,12 @@
 package com.packtpub.userservices.adapter.datasources.authentication;
 
-import com.packtpub.userservices.config.correlation.CorrelationIdUtil;
-import io.opentelemetry.api.GlobalOpenTelemetry;
+import com.packtpub.userservices.internal.exceptions.BusinessException;
 import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.context.Context;
-import io.opentelemetry.context.propagation.TextMapSetter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-
-import java.net.URI;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -20,38 +15,22 @@ public class AuthenticationRestApi {
 
     private final RestClient.Builder restClient;
 
-    public boolean validateToken(String token) {
+    public AuthenticationUser validateToken(String token) {
 
-        Boolean result = restClient.build()
+        AuthenticationUser authenticationUser = restClient.build()
                 .get()
-                .uri(URI.create("http://AUTHENTICATION-SERVICES" + "/v1/api/auth/validate?token=" + token))
-                .headers(httpHeaders -> {
-                    // Propagate trace context
-                    Context currentContext = Context.current();
-                    GlobalOpenTelemetry.getPropagators().getTextMapPropagator()
-                            .inject(currentContext, httpHeaders, HttpHeadersSetter.INSTANCE);
-
-                    // Custom correlation ID (optional)
-                    httpHeaders.add("x-correlation-id", CorrelationIdUtil.getCorrelationId());
-                })
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host("AUTHENTICATION-SERVICES")
+                        .path("/v1/api/auth/validate")
+                        .queryParam("token", token)
+                        .build())
                 .retrieve()
-                .body(Boolean.class);
+                .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
+                    throw new BusinessException(response.getStatusCode().toString(), response.getStatusText());
+                })
+                .body(AuthenticationUser.class);
         log.info("Outgoing traceparent: {}", Span.current().getSpanContext().getTraceId());
-        return result;
-
+        return authenticationUser;
     }
-
-
-    // TextMapSetter for injecting headers
-    private static final class HttpHeadersSetter implements TextMapSetter<HttpHeaders> {
-        static final HttpHeadersSetter INSTANCE = new HttpHeadersSetter();
-
-        @Override
-        public void set(org.springframework.http.HttpHeaders carrier, String key, String value) {
-            if (carrier != null) {
-                carrier.add(key, value);
-            }
-        }
-    }
-
 }

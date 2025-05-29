@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,9 +27,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Cacheable("products")
-    public List<ProductResponse> getAllProducts() {
+    public List<ProductResponse>    getAllProducts() {
         List<Product> products = getProductsUseCase.execute();
-        return products.stream().map(n -> new ProductResponse(n.getId(), n.getName(), n.getDescription(), n.getUserId(), n.getPhotoBase64())).toList();
+
+        List<ProductResponse> productResponses = new ArrayList<>();
+
+        for (Product product : products) {
+            ProductResponse productResponse = new ProductResponse();
+            productResponse.setId(product.getId());
+            productResponse.setName(product.getName());
+            productResponse.setDescription(product.getDescription());
+            productResponse.setUserId(product.getUserId());
+            productResponse.setPhotoBase64(product.getPhotoBase64());
+            productResponses.add(productResponse);
+        }
+
+        return productResponses;
+
     }
 
     @Cacheable("productsById")

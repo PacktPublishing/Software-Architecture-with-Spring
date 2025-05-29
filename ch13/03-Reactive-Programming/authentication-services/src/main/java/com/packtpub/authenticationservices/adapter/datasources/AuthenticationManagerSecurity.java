@@ -3,13 +3,10 @@ package com.packtpub.authenticationservices.adapter.datasources;
 import com.packtpub.authenticationservices.config.security.UserDetailsCustom;
 import com.packtpub.authenticationservices.internal.entities.Authentication;
 import com.packtpub.authenticationservices.internal.repositories.AuthenticationManagerRepository;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 public class AuthenticationManagerSecurity implements AuthenticationManagerRepository {
 

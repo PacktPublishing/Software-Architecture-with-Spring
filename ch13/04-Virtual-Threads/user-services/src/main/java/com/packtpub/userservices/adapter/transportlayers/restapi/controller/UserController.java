@@ -45,12 +45,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/{username}/roles")
-    public ResponseEntity<RoleResponse> getUserRoles(@PathVariable("username") String username, @RequestHeader("traceparent") String traceparent) throws TimeoutException, InterruptedException {
+    public ResponseEntity<RoleResponse> getUserRoles(@PathVariable("username") String username) throws TimeoutException, InterruptedException {
 
-        Thread current = Thread.currentThread();
-        log.info("Current thread: {} (isVirtual: {})", current.getName(), current.isVirtual());
-
-        log.info("Received traceparent: {}", traceparent);  // Verify trace propagation
+        // Enable to test bulkhead
+        // Thread.sleep(20000);
 
         List<String> roles = getUserRolesUseCase.execute(username);
         RoleResponse roleResponse = new RoleResponse();
