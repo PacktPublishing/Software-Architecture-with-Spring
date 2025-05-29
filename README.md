@@ -30,6 +30,8 @@ This book explores the journey of building robust, scalable, and maintainable ap
 - [DBeaver](https://dbeaver.io/) – Universal database client
 - [Compass](https://www.mongodb.com/try/download/compass) – MongoDB GUI
 - [DataGrip](https://www.jetbrains.com/datagrip/download) – JetBrains SQL IDE
+- [Redis Insight](https://redis.io/insight/) – GUI for visualizing Redis data and performance
+
 
 ### 📬 Kafka Client
 - 🛠️ [Kafka Tool](https://kafkatool.com/download.html) – GUI for managing and browsing Kafka clusters 
@@ -38,7 +40,10 @@ This book explores the journey of building robust, scalable, and maintainable ap
 - [Postman](https://www.postman.com/downloads/) – API platform for building and testing APIs
 
 ### 🧪 Performance Testing Tools
-- 🚀 [Apache JMeter](https://jmeter.apache.org/download_jmeter.cgi) – Load testing tool for analyzing and measuring performance
+- [Apache JMeter](https://jmeter.apache.org/download_jmeter.cgi) – Load testing tool for analyzing and measuring performance
+
+### 🧰 Monitoring & Profiling
+- [VisualVM](https://visualvm.github.io/download.html) – Java profiler and monitoring tool
 
 ## 🐳 Containerization
 - [Docker](https://www.docker.com/get-started/) – Container platform for building and running applications
@@ -876,6 +881,103 @@ ch12/
   - 👤 User: `auction_app`
   - 🔑 Password: `auction123`
 
+## ⚙️ Chapter 13: Performance and Optimizations
+
+### 📁 Folder Structure
+
+```
+ch13/
+├── docker-resources/
+│   ├── databases/
+│   │   ├── postgresql/
+│   │   │   └── init.sql               # SQL DDL and DML scripts
+│   │   ├── mongo-init/
+│   │   │   └── init.js                # MongoDB: create DB, collections, insert data
+│   │   ├── .env                       # PostgreSQL and MongoDB credentials
+│   │   └── docker-compose.yml        # Runs PostgreSQL and MongoDB with populated data
+│   ├── observability/
+│   │   └── docker-compose.yml        # Runs Elasticsearch, Logstash, Kibana, OpenTelemetry Collector, and Zipkin
+│   ├── redis/
+│   │   └── docker-compose.yml        # Runs Redis
+├── postman/
+│   └── ch13.postman_collection.json  # Postman collection for chapter 13
+├── 01-Local-Caching/                 # Demonstrates local in-memory caching 
+│   └──product-services/              # Product microservice with local in-memory caching
+├── 02-Distribuited-Caching/          # Demonstrates distributed caching with Redis
+│   └──product-services/              # Product microservice with distributed caching with Redis
+├── 03-Reactive-Programming/          # Showcases reactive programming with Spring WebFlux
+│   └── authentication-services/      # Auth microservice
+├── 04-Virtual-Threads/               # Demonstrates Java virtual threads (Project Loom) with Spring Boot
+│   └── user-services/                # User microservice with Java virtual threads enabled.
+├── configuration-services/           # Spring Cloud Config server
+├── gateway-services/                 # Spring Cloud Gateway for API routing
+├── postman/                          # Postman collection to test the services
+└── service-discovery-services/       # Eureka server for service discovery
+```
+
+---
+
+### ⚙️ Prerequisites
+
+- ☕ Java 21  
+- 🐳 Docker & Docker Compose  
+- 🧰 Maven 3.9.9  
+
+---
+
+### 🚀 Instructions (for running stress tests)
+
+#### ⚙️ Run Services via IDE
+
+1. Navigate to the databases folder: ch13/docker-resources/databases
+   ```bash
+   docker-compose up -d
+   ```
+
+2. Navigate to the observability folder: ch13/docker-resources/observability
+   ```bash
+   docker-compose up -d
+   ```
+3. Navigate to the redis folder: ch13/docker-resources/redis
+   ```bash
+   docker-compose up -d
+   ```
+
+4. Open the microservices in your IDE from the `ch13` folder.
+
+   🔁 **Run the services in the following order**:
+   - `service-discovery-services`
+   - `configuration-services`
+   - `gateway-services`
+   - `authentication-services`
+   - `user-services`
+   - `product-services`
+   -   └── From `01-Local-Caching/` if you're focusing on **local in-memory caching** 
+   -   └── From `02-Distribuited-Caching/` if you're focusing on **distributed caching with Redis**
+4. For each service execute:
+   ```bash
+   mvn clean package
+   mvn spring-boot:run
+   ```
+---
+
+### 🔗 Database Connection Details
+
+- **PostgreSQL**
+  - 🛢️ User DB URL: `jdbc:postgresql://localhost:5432/user_db`
+  - 🛢️ Product DB URL: `jdbc:postgresql://localhost:5432/product_db`
+  - 👤 User: `auction_app`
+  - 🔑 Password: `auction123`
+
+- **MongoDB**
+  - 🌐 URL: `mongodb://auction_app:auction123@localhost:27017/authentication_db?authSource=admin`
+  - 👤 User: `auction_app`
+  - 🔑 Password: `auction123`
+
+- **Redis**
+  - 📍 Host: `127.0.0.1`
+  - 🔌 Port: `6379`
+  - 🔒 Authentication: *(not required by default, configure if needed)*
 
 ### 👨‍💼 Who This Book is For
 
