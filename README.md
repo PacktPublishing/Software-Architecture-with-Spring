@@ -32,7 +32,6 @@ This book explores the journey of building robust, scalable, and maintainable ap
 - [DataGrip](https://www.jetbrains.com/datagrip/download) – JetBrains SQL IDE
 - [Redis Insight](https://redis.io/insight/) – GUI for visualizing Redis data and performance
 
-
 ### 📬 Kafka Client
 - 🛠️ [Kafka Tool](https://kafkatool.com/download.html) – GUI for managing and browsing Kafka clusters 
 
@@ -50,6 +49,15 @@ This book explores the journey of building robust, scalable, and maintainable ap
 
 ## ☸️ Kubernetes Tools
 - [MiniKube](https://minikube.sigs.k8s.io/docs/start) - Tool to run a local Kubernetes cluster for learning and development
+
+## 🤖 Jenkins
+- [Jenkins](https://www.jenkins.io/download/) – Automation server for building, testing, and deploying software
+
+## 🌐 ngrok
+- [ngrok](https://ngrok.com/download) – Secure tunnel for exposing local servers to the public internet
+
+## 🐙 GitHub
+- [GitHub](https://github.com/) – Platform for hosting and collaborating on code using Git version control
 
 ### Sample Code
 
@@ -1029,18 +1037,67 @@ ch14/
 
 All deployment steps for the authentication service are thoroughly explained in the book.
 
-### ⚠️ Attention
+### ⚠️ Attention 1
 To retrieve your local IP address and replace the placeholder 192.168.100.89, run the following command:
 ```bash
     ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' 
    ```
 This will output your current IP address, which should be used in place of 192.168.100.89 in the configuration files or commands.
 
-### 👨‍💼 Who This Book is For
+### ⚠️ Attention 2
+The Kubernetes manifests for the product and user services are included in case you wish to deploy the complete application. Simply follow the same deployment steps outlined in the book for the authorization server, applying them to the product and user services.
 
-  - 🔧 Software architects looking to deepen Spring-based architecture skills
-  - 💻 Developers & engineers designing scalable systems
-  - 👨‍📈 Technical leads focused on performance, scalability, and security
+## 🔁 Chapter 15: Continuous Integration and Continuous Deployment
+
+### 📁 Folder Structure
+
+```
+ch15/
+├── docker-resources/                                   # Local Docker setup for databases
+│   ├── postgresql/
+│   │   └── init.sql                                    # SQL DDL and DML scripts
+│   ├── mongo-init/
+│   │   └── init.js                                     # MongoDB: create DB, collections, and insert data
+│   ├── .env                                            # Environment variables for DB credentials
+│   └── docker-compose.yml                              # Starts PostgreSQL and MongoDB with populated data
+├── postman/
+│   └── ch15.postman_collection.json                    # Postman collection for testing microservices
+├── product-services/                                   # Product microservice
+│      └── kubernetes/                                  # Kubernetes manifests for service orchestration 
+│         ├── product-services-deployment.yaml          # Deployment for product service
+│         ├── product-services-ingress.yaml             # Ingress configuration
+│         └── product-services-service.yaml             # Cluster service configuration
+├── authentication-services/                            # Authentication microservice
+│     └── kubernetes/                                   # Kubernetes manifests for service orchestration
+│         ├── authentication-services-deployment.yaml   # Deployment for authentication service
+│         ├── authentication-services-ingress.yaml      # Ingress configuration
+│         └── authentication-services-service.yaml      # Cluster service configuration
+└── user-services/                                      # User microservice
+        ├── user-services-deployment.yaml               # Deployment for user service
+        ├── user-services-ingress.yaml                  # Ingress configuration
+        └── user-services-service.yaml                  # Cluster service configuration
+```
+
+---
+
+### ⚙️ Prerequisites
+
+- ☕ Java 21  
+- 🐳 Docker & Docker Compose  
+- 🧰 Maven 3.9.9  
+- ☸️ Minikube
+- 🌐 ngrok
+- 🐙 GitHub account
+- 🤖 Jenkins
+---
+
+All steps required to deploy the authentication service to Minikube using Jenkins are thoroughly documented in the book.
+
+### ⚠️ Attention
+The Kubernetes manifests must reside in the project’s root directory, as Jenkins relies on this structure to deploy them to Minikube.
+
+### 👨‍💼 Who This Book is For
+This book is for Java engineers transitioning to software architecture roles and architects seeking deeper insight into Spring-based architectural styles. Mid-level Spring Boot developers will be able to master architecture principles to build scalable, maintainable applications with the help of practical guidance on using modern architectural patterns.
 
 ## 💬 Feedback and Contributions
 
