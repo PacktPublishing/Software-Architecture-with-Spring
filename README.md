@@ -6,7 +6,7 @@
     <td><img src="book-cover.png" alt="Software Architecture with Spring" width="250"/></td>
     <td style="vertical-align: top; padding-left: 20px;">
       <ul>
-        <li>🔗 <strong><a href="https://lnkd.in/dZ8Wjqrd">Buy on Packt</a></strong></li>
+        <li>🔗 <strong><a href="https://www.packtpub.com/en-us/product/software-architecture-with-spring-9781835880609?utm_medium=affiliate&utm_campaign=eb8fa252-e255-175d-1cc7-659b7b674281&utm_term=e2025f61-d111-eb11-a812-00224801bc77&utm_content=B22261">Buy on Packt</a></strong></li>
         <li>🛒 <strong><a href="https://packt.link/P1FKw">Buy on Amazon</a></strong></li>
       </ul>
     </td>
