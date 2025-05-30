@@ -48,6 +48,8 @@ This book explores the journey of building robust, scalable, and maintainable ap
 ## 🐳 Containerization
 - [Docker](https://www.docker.com/get-started/) – Container platform for building and running applications
 
+## ☸️ Kubernetes Tools
+- [MiniKube](https://minikube.sigs.k8s.io/docs/start) - Tool to run a local Kubernetes cluster for learning and development
 
 ### Sample Code
 
@@ -977,7 +979,62 @@ ch13/
 - **Redis**
   - 📍 Host: `127.0.0.1`
   - 🔌 Port: `6379`
-  - 🔒 Authentication: *(not required by default, configure if needed)*
+  - 🔒 Authentication: *(not required by default)*
+
+## 🧭 Chapter 14: Orchestration with Kubernetes
+
+### 📁 Folder Structure
+
+```
+ch14/
+├── docker-resources/                          # Local Docker setup for databases
+│   ├── postgresql/
+│   │   └── init.sql                           # SQL DDL and DML scripts
+│   ├── mongo-init/
+│   │   └── init.js                            # MongoDB: create DB, collections, and insert data
+│   ├── .env                                   # Environment variables for DB credentials
+│   └── docker-compose.yml                     # Starts PostgreSQL and MongoDB with populated data
+├── postman/
+│   └── ch14.postman_collection.json           # Postman collection for testing microservices
+├── product-services/                          # Product microservice
+├── authentication-services/                   # Authentication microservice
+├── user-services/                             # User microservice
+└── kubernetes/                                # Kubernetes manifests for service orchestration
+    ├── databases/
+    │   ├── mongodb-external-service.yaml      # Exposes MongoDB externally in the cluster
+    │   └── postgresql-external-service.yaml   # Exposes PostgreSQL externally in the cluster
+    ├── authentication/
+    │   ├── authentication-services-deployment.yaml  # Deployment for authentication service
+    │   ├── authentication-services-ingress.yaml     # Ingress configuration
+    │   └── authentication-services-service.yaml     # Cluster service configuration
+    ├── product/
+    │   ├── product-services-deployment.yaml         # Deployment for product service
+    │   ├── product-services-ingress.yaml            # Ingress configuration
+    │   └── product-services-service.yaml            # Cluster service configuration
+    └── user/
+        ├── user-services-deployment.yaml            # Deployment for user service
+        ├── user-services-ingress.yaml               # Ingress configuration
+        └── user-services-service.yaml               # Cluster service configuration
+```
+
+---
+
+### ⚙️ Prerequisites
+
+- ☕ Java 21  
+- 🐳 Docker & Docker Compose  
+- 🧰 Maven 3.9.9  
+- ☸️ Minikube
+---
+
+All deployment steps for the authentication service are thoroughly explained in the book.
+
+### ⚠️ Attention
+To retrieve your local IP address and replace the placeholder 192.168.100.89, run the following command:
+```bash
+    ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' 
+   ```
+This will output your current IP address, which should be used in place of 192.168.100.89 in the configuration files or commands.
 
 ### 👨‍💼 Who This Book is For
 
