@@ -3,11 +3,13 @@ package com.packtpub.userservices.adapter.datasources.user;
 import com.packtpub.userservices.internal.entity.Role;
 import com.packtpub.userservices.internal.entity.User;
 import com.packtpub.userservices.internal.repositories.UserRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Component
 public class UserJpaDatasource implements UserRepository {
 
     private final UserJpaRepository userJpaRepository;
@@ -36,7 +38,7 @@ public class UserJpaDatasource implements UserRepository {
                 userEntity.getCity(),
                 userEntity.getState(),
                 userEntity.getCountry(),
-                userEntity.getRoles().stream().map(this::toRoleDomain).collect(Collectors.toSet())
+                userEntity.getRoles() != null ? userEntity.getRoles().stream().map(this::toRoleDomain).collect(Collectors.toSet()) : null
         );
     }
 

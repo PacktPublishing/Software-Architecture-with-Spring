@@ -1,8 +1,7 @@
 package com.packtpub.authenticationservices.internal.repositories;
 
-import java.util.List;
-import java.util.concurrent.TimeoutException;
+import reactor.core.publisher.Flux;
 
 public interface UserRepository {
-    List<String> getRolesByUsername(String username);
+    Flux<String> getRolesByUsername(String username);
 }

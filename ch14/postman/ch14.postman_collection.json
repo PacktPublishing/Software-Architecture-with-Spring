@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "acdf7b57-fe4c-43c7-8e39-2a2cfd89a846",
+		"_postman_id": "3fe332d7-cf04-4425-8e13-660dff223e37",
 		"name": "ch14",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "4179687",
-		"_collection_link": "https://gold-zodiac-469756.postman.co/workspace/SAWS6~dfe77395-c905-4e2b-93e1-a9acce6c5cc6/collection/4179687-acdf7b57-fe4c-43c7-8e39-2a2cfd89a846?action=share&source=collection_link&creator=4179687"
+		"_collection_link": "https://gold-zodiac-469756.postman.co/workspace/TEST-BOOK~1525faea-4736-4582-a1be-faefae051718/collection/4179687-3fe332d7-cf04-4425-8e13-660dff223e37?action=share&source=collection_link&creator=4179687"
 	},
 	"item": [
 		{
@@ -27,12 +27,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/api/auth",
+					"raw": "http://authentication-services.com/v1/api/auth",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"authentication-services",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"v1",
 						"api",
@@ -62,12 +62,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/api/auth",
+					"raw": "http://authentication-services.com/v1/api/auth",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"authentication-services",
+						"com"
 					],
-					"port": "8080",
 					"path": [
 						"v1",
 						"api",

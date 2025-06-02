@@ -6,13 +6,14 @@ import com.packtpub.authenticationservices.adapter.transportlayers.restapi.dto.r
 import com.packtpub.authenticationservices.internal.entities.Authentication;
 import com.packtpub.authenticationservices.internal.usecases.GenerateTokenUseCase;
 import com.packtpub.authenticationservices.internal.usecases.ValidateTokenUseCase;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 @RequestMapping("/v1/api/auth")
 @RestController
+@Slf4j
 public class AuthenticationController {
 
     private final GenerateTokenUseCase generateTokenUseCase;
@@ -24,14 +25,18 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity<AuthenticationResponse> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        final Optional<String> token = generateTokenUseCase.execute(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        return ResponseEntity.ok(new AuthenticationResponse(token.get()));
+    public Mono<AuthenticationResponse> createAuthenticationToken(@RequestBody Mono<AuthenticationRequest> authenticationRequestMono) {
+        return authenticationRequestMono
+                .flatMap(authenticationRequest ->
+                        generateTokenUseCase.execute(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+                                .map(AuthenticationResponse::new)
+                );
     }
 
     @GetMapping("/validate")
     public ResponseEntity<AuthenticationUserResponse> validateToken(@RequestParam String token) {
         final Authentication authentication = validateTokenUseCase.execute(token);
-        return authentication !=  null ? ResponseEntity.ok(new AuthenticationUserResponse(authentication.getUsername(), authentication.getRoles())) : null;
+        return ResponseEntity.ok(new AuthenticationUserResponse(authentication.getUsername(), authentication.getRoles()));
     }
+
 }

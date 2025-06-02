@@ -1,29 +1,35 @@
 package com.packtpub.userservices.adapter.datasources.authentication;
 
 import com.packtpub.userservices.internal.exceptions.BusinessException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-import org.springframework.http.HttpStatusCode;
 
+@Slf4j
+@RequiredArgsConstructor
 @Service
 public class AuthenticationRestApi {
 
-    private final RestClient restClient;
+    private final RestClient.Builder restClient;
 
     // Use Kubernetes DNS for service discovery
     @Value("${services.authentication.url}")
     private String authenticationServiceUrl;
 
-    public AuthenticationRestApi(RestClient restClient) {
-        this.restClient = restClient;
-    }
 
     public AuthenticationUser validateToken(String token) {
-        AuthenticationUser authenticationUser = restClient.get()
-                .uri(authenticationServiceUrl + "/v1/api/auth/validate?token={token}", token)
+
+        AuthenticationUser authenticationUser = restClient.build()
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .scheme("http")
+                        .host(authenticationServiceUrl)
+                        .path("/v1/api/auth/validate")
+                        .queryParam("token", token)
+                        .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
                     throw new BusinessException(response.getStatusCode().toString(), response.getStatusText());

@@ -1,10 +1,14 @@
 package com.packtpub.productservices.adapter.datasources.product;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.apache.tomcat.util.codec.binary.Base64;
+import lombok.NoArgsConstructor;
+import org.apache.commons.codec.binary.Base64;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "product")
 public class ProductEntity {
