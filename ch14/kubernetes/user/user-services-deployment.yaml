@@ -17,6 +17,7 @@ spec:
       containers:
         - name: user-services
           image: wxesquevixos/user-services:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:

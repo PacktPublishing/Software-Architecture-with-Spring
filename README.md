@@ -1038,14 +1038,27 @@ ch14/
 All deployment steps for the authentication service are thoroughly explained in the book.
 
 ### ⚠️ Attention 1
-To retrieve your local IP address and replace the placeholder 192.168.100.89, run the following command:
+
+Some Kubernetes manifests under `ch14/kubernetes/` contain a hardcoded IP address (`192.168.100.89`) that must be replaced with your local machine’s actual IP address to ensure proper communication within the Minikube environment.
+
+**Update the IP address in the following files:**
+
+- `ch14/kubernetes/databases/mongodb-external-service.yaml`
+- `ch14/kubernetes/databases/postgresql-external-service.yaml` (required if deploying the user and product services)
+- `ch14/kubernetes/authentication/authentication-services-deployment.yaml`
+- `ch14/kubernetes/user/user-services-deployment.yaml` (if deploying the user service)
+- `ch14/kubernetes/product/product-services-deployment.yaml` (if deploying the product service)
+
+To find your machine's IP address, run the following command:
+
 ```bash
-    ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' 
-   ```
-This will output your current IP address, which should be used in place of 192.168.100.89 in the configuration files or commands.
+ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}'
+```
+
+Replace every instance of `192.168.100.89` with the IP returned by this command. This step is critical for the services to connect to your local databases and function correctly within Minikube.
 
 ### ⚠️ Attention 2
-The Kubernetes manifests for the product and user services are included in case you wish to deploy the complete application. Simply follow the same deployment steps outlined in the book for the authorization server, applying them to the product and user services.
+The Kubernetes manifests for the product and user services are included in case you wish to deploy the complete application. Simply follow the same deployment steps outlined in the book for the authentication services, applying them to the product and user services.
 
 ## 🔁 Chapter 15: Continuous Integration and Continuous Deployment
 
@@ -1053,29 +1066,33 @@ The Kubernetes manifests for the product and user services are included in case 
 
 ```
 ch15/
-├── docker-resources/                                   # Local Docker setup for databases
+├── docker-resources/                                 # Local Docker setup for databases
 │   ├── postgresql/
-│   │   └── init.sql                                    # SQL DDL and DML scripts
+│   │   └── init.sql                                  # SQL DDL and DML scripts
 │   ├── mongo-init/
-│   │   └── init.js                                     # MongoDB: create DB, collections, and insert data
-│   ├── .env                                            # Environment variables for DB credentials
-│   └── docker-compose.yml                              # Starts PostgreSQL and MongoDB with populated data
+│   │   └── init.js                                   # MongoDB: create DB, collections, and insert data
+│   ├── .env                                          # Environment variables for DB credentials
+│   └── docker-compose.yml                            # Starts PostgreSQL and MongoDB with populated data
 ├── postman/
-│   └── ch15.postman_collection.json                    # Postman collection for testing microservices
-├── product-services/                                   # Product microservice
-│      └── kubernetes/                                  # Kubernetes manifests for service orchestration 
-│         ├── product-services-deployment.yaml          # Deployment for product service
-│         ├── product-services-ingress.yaml             # Ingress configuration
-│         └── product-services-service.yaml             # Cluster service configuration
-├── authentication-services/                            # Authentication microservice
-│     └── kubernetes/                                   # Kubernetes manifests for service orchestration
-│         ├── authentication-services-deployment.yaml   # Deployment for authentication service
-│         ├── authentication-services-ingress.yaml      # Ingress configuration
-│         └── authentication-services-service.yaml      # Cluster service configuration
-└── user-services/                                      # User microservice
-        ├── user-services-deployment.yaml               # Deployment for user service
-        ├── user-services-ingress.yaml                  # Ingress configuration
-        └── user-services-service.yaml                  # Cluster service configuration
+│   └── ch15.postman_collection.json                  # Postman collection for testing microservices
+├── authentication-services/                          # Authentication microservice
+│   ├── kubernetes/                                   # Kubernetes manifests for service orchestration
+│   │   ├── authentication-services-deployment.yaml   # Deployment for authentication service
+│   │   ├── authentication-services-ingress.yaml      # Ingress configuration
+│   │   └── authentication-services-service.yaml      # Cluster service configuration
+|   └── Jenkinsfile                                   # Pipeline script for automating the build, test, Docker image push, and deployment to Minikube
+├── product-services/                                # Product microservice
+│   ├── kubernetes/                                  # Kubernetes manifests for service orchestration 
+│   │   ├── product-services-deployment.yaml         # Deployment for product service
+│   │   ├── product-services-ingress.yaml            # Ingress configuration
+│   │   └── product-services-service.yaml            # Cluster service configuration
+|   └── Jenkinsfile                                  # Pipeline script for automating the build, test, Docker image push, and deployment to Minikube
+└── user-services/                                   # User microservice
+   ├── kubernetes/                                  # Kubernetes manifests for service orchestration 
+   │   ├── user-services-deployment.yaml            # Deployment for user service
+   │   ├── user-services-ingress.yaml               # Ingress configuration
+   │   └── user-services-service.yaml               # Cluster service configuration
+   └── Jenkinsfile                                  # Pipeline script for automating the build, test, Docker image push, and deployment to Minikube
 ```
 
 ---
@@ -1091,10 +1108,17 @@ ch15/
 - 🤖 Jenkins
 ---
 
-All steps required to deploy the authentication service to Minikube using Jenkins are thoroughly documented in the book.
+### ⚠️ Attention 1
+The Kubernetes manifests must be located in the project’s root directory, as Jenkins depends on this structure to deploy services to Minikube.
+In the **Setting up GitHub** section of Chapter 15, before pushing the project to your GitHub repository, navigate to ```authentication-services/kubernetes```, open the ```authentication-services-deployment.yaml``` file and replace the hardcoded IP 192.168.100.89 with your local machine’s IP address, which you can retrieve using the following command:
+```bash
+    ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' 
+   ```
+This command will return your active IP address, which must be used in the deployment configuration to ensure proper communication within the Minikube environment.
 
-### ⚠️ Attention
-The Kubernetes manifests must reside in the project’s root directory, as Jenkins relies on this structure to deploy them to Minikube.
+### ⚠️ Attention 2
+The configured Jenkinsfile and Kubernetes manifests for the product and user services are included in case you wish to deploy the complete application. Simply follow the same deployment steps outlined in the book for the authorization server, applying them to the product and user services.
+
 
 ### 👨‍💼 Who This Book is For
 This book is for Java engineers transitioning to software architecture roles and architects seeking deeper insight into Spring-based architectural styles. Mid-level Spring Boot developers will be able to master architecture principles to build scalable, maintainable applications with the help of practical guidance on using modern architectural patterns.

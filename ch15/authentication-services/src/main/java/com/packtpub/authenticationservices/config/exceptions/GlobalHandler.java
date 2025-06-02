@@ -3,73 +3,70 @@ package com.packtpub.authenticationservices.config.exceptions;
 import com.packtpub.authenticationservices.internal.exceptions.BusinessException;
 import com.packtpub.authenticationservices.internal.exceptions.BusinessExceptionResponse;
 import io.jsonwebtoken.ExpiredJwtException;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
+import reactor.core.publisher.Mono;
 
-import java.security.SignatureException;
+import java.nio.file.AccessDeniedException;
 
-@Slf4j
 @RestControllerAdvice
-public class GlobalHandler extends ResponseEntityExceptionHandler {
+public class GlobalHandler {
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<BusinessExceptionResponse> handleException(BusinessException e){
-
-        BusinessExceptionResponse response = new BusinessExceptionResponse(
+    public Mono<ResponseEntity<BusinessExceptionResponse<Object>>> handleException(BusinessException e) {
+        var response = new BusinessExceptionResponse<>(
                 e.getCode(),
                 null,
                 e.getLocalizedMessage()
         );
+        return Mono.just(ResponseEntity.ok(response));
+    }
 
-        log.error(e.getLocalizedMessage());
+    @ExceptionHandler(BadCredentialsException.class)
+    public Mono<ProblemDetail> handleBadCredentials(BadCredentialsException ex) {
+        return Mono.just(buildProblemDetail(HttpStatus.UNAUTHORIZED, ex.getMessage(), ex.getMessage()));
+    }
 
-        return ResponseEntity.ok(response);
+    @ExceptionHandler(AccountStatusException.class)
+    public Mono<ProblemDetail> handleAccountStatus(AccountStatusException ex) {
+        return Mono.just(buildProblemDetail(HttpStatus.FORBIDDEN, ex.getMessage(), "The account is locked"));
+    }
+
+    @ExceptionHandler({AccessDeniedException.class, AuthorizationDeniedException.class})
+    public Mono<ProblemDetail> handleAccessDenied(Exception ex) {
+        return Mono.just(buildProblemDetail(HttpStatus.FORBIDDEN, ex.getMessage(), "You are not authorized to access this resource"));
+    }
+
+    @ExceptionHandler({io.jsonwebtoken.security.SignatureException.class, java.security.SignatureException.class})
+    public Mono<ProblemDetail> handleInvalidSignature(Exception ex) {
+        return Mono.just(buildProblemDetail(HttpStatus.UNAUTHORIZED, ex.getMessage(), "The JWT signature is invalid"));
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public Mono<ProblemDetail> handleExpiredJwt(ExpiredJwtException ex) {
+        return Mono.just(buildProblemDetail(HttpStatus.UNAUTHORIZED, ex.getMessage(), "The JWT has expired"));
+    }
+
+    @ExceptionHandler(HttpClientErrorException.Unauthorized.class)
+    public Mono<ProblemDetail> handleUnauthorized(HttpClientErrorException.Unauthorized ex) {
+        return Mono.just(buildProblemDetail(HttpStatus.UNAUTHORIZED, ex.getMessage(), "The JWT has expired"));
     }
 
     @ExceptionHandler(Exception.class)
-    public ProblemDetail handleSecurityException(Exception exception) {
-        ProblemDetail errorDetail = null;
+    public Mono<ProblemDetail> handleGeneral(Exception ex) {
+        return Mono.just(buildProblemDetail(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), "Unknown internal server error"));
+    }
 
-        return switch (exception) {
-            case BadCredentialsException ex -> {
-                errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), exception.getMessage());
-                errorDetail.setProperty("description", "The username or password is incorrect");
-                yield errorDetail;
-            }
-            case AccountStatusException ex -> {
-                errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-                errorDetail.setProperty("description", "The account is locked");
-                yield errorDetail;
-            }
-            case AccessDeniedException ex -> {
-                errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-                errorDetail.setProperty("description", "You are not authorized to access this resource");
-                yield errorDetail;
-            }
-            case SignatureException ex -> {
-                errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-                errorDetail.setProperty("description", "The JWT signature is invalid");
-                yield errorDetail;
-            }
-            case ExpiredJwtException ex -> {
-                errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-                errorDetail.setProperty("description", "The JWT signature is invalid");
-                yield errorDetail;
-            }
-            default -> {
-                errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
-                errorDetail.setProperty("description", "Unknown internal server error.");
-                yield errorDetail;
-            }
-        };
-
+    private ProblemDetail buildProblemDetail(HttpStatus status, String message, String description) {
+        var detail = ProblemDetail.forStatusAndDetail(status, message);
+        detail.setProperty("description", description);
+        return detail;
     }
 }

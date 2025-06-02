@@ -17,6 +17,7 @@ spec:
       containers:
         - name: product-services
           image: wxesquevixos/product-services:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:

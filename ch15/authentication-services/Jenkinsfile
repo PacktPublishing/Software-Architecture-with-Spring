@@ -51,6 +51,8 @@ pipeline {
                 kubectl apply -f kubernetes/authentication-services-deployment.yaml
                 kubectl apply -f kubernetes/authentication-services-service.yaml
                 kubectl apply -f kubernetes/authentication-services-ingress.yaml
+                echo '🧹 Deleting existing pod to force image pull...'
+                kubectl delete pod -l app=authentication-services --ignore-not-found=true
                 """
             }
         }

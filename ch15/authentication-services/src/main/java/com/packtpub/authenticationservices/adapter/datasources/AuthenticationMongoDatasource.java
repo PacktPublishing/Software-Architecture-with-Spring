@@ -1,11 +1,10 @@
 package com.packtpub.authenticationservices.adapter.datasources;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 @Repository
-public interface AuthenticationMongoDatasource extends MongoRepository<AuthenticationDocument, String> {
-    Optional<AuthenticationDocument> findByUsername(String username);
+public interface AuthenticationMongoDatasource extends ReactiveCrudRepository<AuthenticationDocument, Long> {
+    Mono<AuthenticationDocument> findByUsername(String username);
 }

@@ -17,6 +17,7 @@ spec:
       containers:
         - name: authentication-services
           image: wxesquevixos/authentication-services:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:

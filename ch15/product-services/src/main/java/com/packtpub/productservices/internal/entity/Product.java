@@ -1,6 +1,6 @@
 package com.packtpub.productservices.internal.entity;
 
-import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.commons.codec.binary.Base64;
 
 public class Product {
     private Integer id;
