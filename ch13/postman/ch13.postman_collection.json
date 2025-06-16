@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "03fd8048-7225-466e-ae47-541f9501970b",
+		"name": "ch13",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4179687",
+		"_collection_link": "https://gold-zodiac-469756.postman.co/workspace/TEST-BOOK~1525faea-4736-4582-a1be-faefae051718/collection/4179687-03fd8048-7225-466e-ae47-541f9501970b?action=share&source=collection_link&creator=4179687"
+	},
+	"item": [
+		{
+			"name": "AUTH - LOGIN ADMIN",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MzI4NDUwNjIsImV4cCI6MTczMjkzMTQ2Mn0.-AnSh2zU-hzU1rT6tujwUnaeEaCYXfEy3b2Okce1_t8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin@wxauction.com\",\n    \"password\": \"test123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/authentication/v1/api/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"authentication",
+						"v1",
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS - GET BY ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJ7XCJyb2xlc1wiOltcIlJPTEVfQURNSU5cIixcIlJPTEVfVVNFUlwiXX0iXSwic3ViIjoiYWRtaW5Ad3hhdWN0aW9uLmNvbSIsImlhdCI6MTc0ODU0NTQ0MSwiZXhwIjoxNzQ4NjMxODQxfQ.NqM6vrYdJZ6fs5VOBWTzjOXyHKe2h88E8j78niw1NqC5KsrkF_uaVgVtRaM_dgTy36EPYfoBN2DuxnCshTlxBg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHd4YXVjdGlvbi5jb20iLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzI3ODMyMTk3LCJleHAiOjE3Mjc5MTg1OTd9.6_2_nRAwvPGEmLYHX5lyTf8rdjDmg3dAtX_jBTmkviE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8072/product-services/v1/products/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"product-services",
+						"v1",
+						"products",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS - ADD",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJ7XCJyb2xlc1wiOltcIlJPTEVfVVNFUlwiLFwiUk9MRV9BRE1JTlwiXX0iXSwic3ViIjoiYWRtaW5Ad3hhdWN0aW9uLmNvbSIsImlhdCI6MTc0ODU0NjYyNCwiZXhwIjoxNzQ4NjMzMDI0fQ.bX9WZRoD8m-gp7eACbsqKj2isTeKOh_8Q4Ik6zZzOOSEGOdVifmzA81rDHBpvDUd72FxKuix1J_1lCJt-i6g3A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Produto novo xxx\",\n    \"description\": \"Fancy old motorbike\",\n    \"userId\": 2,\n    \"photoBase64\": \"cnFlcXdlcXdl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8072/product-services/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"product-services",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRODUCTS - GET ALL",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJ7XCJyb2xlc1wiOltcIlJPTEVfVVNFUlwiLFwiUk9MRV9BRE1JTlwiXX0iXSwic3ViIjoiYWRtaW5Ad3hhdWN0aW9uLmNvbSIsImlhdCI6MTc0ODU0NjYyNCwiZXhwIjoxNzQ4NjMzMDI0fQ.bX9WZRoD8m-gp7eACbsqKj2isTeKOh_8Q4Ik6zZzOOSEGOdVifmzA81rDHBpvDUd72FxKuix1J_1lCJt-i6g3A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHd4YXVjdGlvbi5jb20iLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzI3ODMyMTk3LCJleHAiOjE3Mjc5MTg1OTd9.6_2_nRAwvPGEmLYHX5lyTf8rdjDmg3dAtX_jBTmkviE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8072/product-services/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"product-services",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

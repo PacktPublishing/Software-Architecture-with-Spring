@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-services
+  labels:
+    app: product-services
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-services
+  template:
+    metadata:
+      labels:
+        app: product-services
+    spec:
+      containers:
+        - name: product-services
+          image: wxesquevixos/product-services:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              value: "jdbc:postgresql://192.168.9.53:5432/product_db"
+            - name: AUTHENTICATION-SERVICES
+              value: "http://authentication-services.default.svc.cluster.local"

@@ -1,0 +1,1058 @@
+{
+	"info": {
+		"_postman_id": "1705f2f8-4195-49d9-97f4-8969f7978d81",
+		"name": "ch7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4179687",
+		"_collection_link": "https://gold-zodiac-469756.postman.co/workspace/TEST-BOOK~1525faea-4736-4582-a1be-faefae051718/collection/4179687-1705f2f8-4195-49d9-97f4-8969f7978d81?action=share&source=collection_link&creator=4179687"
+	},
+	"item": [
+		{
+			"name": "01-Service-Discovery",
+			"item": [
+				{
+					"name": "AUTH - LOGIN ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - LOGIN USER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - VALIDATE-TOKEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/validate?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eydJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTI4MjYsImV4cCI6MTc0ODE5OTIyNn0.xcmzuC4euZ37UKnP9wa1haw9cHfoPxtOEhc1aOKkjgxELKEqLkGLZ62K9EdjBhpE63PHAvxafD2a5tDgiVBBpA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eydJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTI4MjYsImV4cCI6MTc0ODE5OTIyNn0.xcmzuC4euZ37UKnP9wa1haw9cHfoPxtOEhc1aOKkjgxELKEqLkGLZ62K9EdjBhpE63PHAvxafD2a5tDgiVBBpA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "deyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTI4MjYsImV4cCI6MTc0ODE5OTIyNn0.xcmzuC4euZ37UKnP9wa1haw9cHfoPxtOEhc1aOKkjgxELKEqLkGLZ62K9EdjBhpE63PHAvxafD2a5tDgiVBdBpA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjAyOTQ4MDksImV4cCI6MTcyMDM4MTIwOX0.VXofsOK4DVbDuGMLIK2W3jmOKCkxOleKc69MzSTjjDc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTI4MjYsImV4cCI6MTc0ODE5OTIyNn0.xcmzuC4euZ37UKnP9wa1haw9cHfoPxtOEhc1aOKkjgxELKEqLkGLZ62K9EdjBhpE63PHAvxafD2a5tDgiVBBpAf",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjAyOTAzODgsImV4cCI6MTcyMDM3Njc4OH0.r4h3TTiDWYAHl1IKitu_TDysG9W97LYeW0Vge6wy5V0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET-ROLES",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/users/admin@wxauction.com/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"users",
+								"admin@wxauction.com",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "02-Load-Balancer",
+			"item": [
+				{
+					"name": "AUTH - LOGIN ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - LOGIN USER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTgxMzQsImV4cCI6MTc0ODIwNDUzNH0.ry0sLJ_81acEDmKjocRqh6vEwMeIpUABAUaNrCp2L7zsF4OATRD0ANDkoqq2lebNbkraikk6LkQFwhVD6Myzxw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjAyOTQ4MDksImV4cCI6MTcyMDM4MTIwOX0.VXofsOK4DVbDuGMLIK2W3jmOKCkxOleKc69MzSTjjDc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTUzNzgsImV4cCI6MTc0ODIwMTc3OH0._T1lu8DZh8n1KGwW-afNa3q22QqHI3WkB46qkDK4d6G0ioz0Dj2gXhlrRgluD2l5uTYC-jx5Yzg26vppXT_2GQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjAyOTAzODgsImV4cCI6MTcyMDM3Njc4OH0.r4h3TTiDWYAHl1IKitu_TDysG9W97LYeW0Vge6wy5V0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET-ROLES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/users/admin@wxauction.com/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"users",
+								"admin@wxauction.com",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - VALIDATE-TOKEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/api/auth/validate?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTc2NzgsImV4cCI6MTc0ODIwNDA3OH0.aRZN28_0D-MMVf4REUvQKEheMRcYCM0a4ohc3KGXpxWysNRdVMCpoEBt3GSkdQGKOLrEA9KBfV1-sFEfN10CUA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"api",
+								"auth",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMTc2NzgsImV4cCI6MTc0ODIwNDA3OH0.aRZN28_0D-MMVf4REUvQKEheMRcYCM0a4ohc3KGXpxWysNRdVMCpoEBt3GSkdQGKOLrEA9KBfV1-sFEfN10CUA"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "03-Gateway",
+			"item": [
+				{
+					"name": "AUTH - LOGIN ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/authentication/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication",
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - LOGIN USER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/authentication-services/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication-services",
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjA5NDEsImV4cCI6MTc0ODIwNzM0MX0.GGJRHacS0BkpOxveL2Va4xq1G14ZaI63mBqjpgmMy9C8XND4L1eVyr7dZZQWLf3P6KUgnlTav8ISOLj7TFZnew",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MjA4ODgzMDAsImV4cCI6MTcyMDk3NDcwMH0.pdNwYJPKbQsgNBsBpuv0S29GpxJNHDmU96lvvEyT-r4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8072/user-services/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"user-services",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjA5NDEsImV4cCI6MTc0ODIwNzM0MX0.GGJRHacS0BkpOxveL2Va4xq1G14ZaI63mBqjpgmMy9C8XND4L1eVyr7dZZQWLf3P6KUgnlTav8ISOLj7TFZnew",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjAyOTAzODgsImV4cCI6MTcyMDM3Njc4OH0.r4h3TTiDWYAHl1IKitu_TDysG9W97LYeW0Vge6wy5V0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8072/product-services/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"product-services",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET-ROLES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/user-services/v1/users/admin@wxauction.com/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"user-services",
+								"v1",
+								"users",
+								"admin@wxauction.com",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - VALIDATE-TOKEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/authentication-services/v1/api/auth/validate?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjA5NDEsImV4cCI6MTc0ODIwNzM0MX0.GGJRHacS0BkpOxveL2Va4xq1G14ZaI63mBqjpgmMy9C8XND4L1eVyr7dZZQWLf3P6KUgnlTav8ISOLj7TFZnew",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication-services",
+								"v1",
+								"api",
+								"auth",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjA5NDEsImV4cCI6MTc0ODIwNzM0MX0.GGJRHacS0BkpOxveL2Va4xq1G14ZaI63mBqjpgmMy9C8XND4L1eVyr7dZZQWLf3P6KUgnlTav8ISOLj7TFZnew"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "04-Configuration-Server",
+			"item": [
+				{
+					"name": "AUTH - LOGIN ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/authentication/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication",
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - LOGIN USER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/authentication/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication",
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MjA4ODgzMDAsImV4cCI6MTcyMDk3NDcwMH0.pdNwYJPKbQsgNBsBpuv0S29GpxJNHDmU96lvvEyT-r4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8072/user-services/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"user-services",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MjA4ODgzMDAsImV4cCI6MTcyMDk3NDcwMH0.pdNwYJPKbQsgNBsBpuv0S29GpxJNHDmU96lvvEyT-r4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjAyOTAzODgsImV4cCI6MTcyMDM3Njc4OH0.r4h3TTiDWYAHl1IKitu_TDysG9W97LYeW0Vge6wy5V0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8072/product-services/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"product-services",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET-ROLES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/user-services/v1/users/admin@wxauction.com/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"user-services",
+								"v1",
+								"users",
+								"admin@wxauction.com",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - VALIDATE-TOKEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/authentication-services/v1/api/auth/validate?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIkFETUlOIiwiVVNFUiJdLCJpYXQiOjE3MTkyMjcyMzIsImV4cCI6MTcxOTMxMzYzMn0.3oyKkCpl0nqtAiT9cK6Ri5V-HxVk6U-Y7D5imQYJONo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication-services",
+								"v1",
+								"api",
+								"auth",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIkFETUlOIiwiVVNFUiJdLCJpYXQiOjE3MTkyMjcyMzIsImV4cCI6MTcxOTMxMzYzMn0.3oyKkCpl0nqtAiT9cK6Ri5V-HxVk6U-Y7D5imQYJONo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REFRESH SCOPE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "05-Resilience4J",
+			"item": [
+				{
+					"name": "AUTH - LOGIN ADMIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/authentication/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication",
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - LOGIN USER",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"user@wxauction.com\",\n    \"password\": \"test123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8072/authentication/v1/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication",
+								"v1",
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjc2NDEsImV4cCI6MTc0ODIxNDA0MX0.PUhNuA9fYRuLXFauPoOxFdBf6ZyDPkfWA1T8HIi6_AmOHDFSUqSIrghMbcuBep79YSGo1nn6p42iPurEHUOprQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJpYXQiOjE3MjA4ODgzMDAsImV4cCI6MTcyMDk3NDcwMH0.pdNwYJPKbQsgNBsBpuv0S29GpxJNHDmU96lvvEyT-r4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8072/user-services/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"user-services",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTS - GET ALL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjc2NDEsImV4cCI6MTc0ODIxNDA0MX0.PUhNuA9fYRuLXFauPoOxFdBf6ZyDPkfWA1T8HIi6_AmOHDFSUqSIrghMbcuBep79YSGo1nn6p42iPurEHUOprQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB3eGF1Y3Rpb24uY29tIiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJpYXQiOjE3MjAyOTAzODgsImV4cCI6MTcyMDM3Njc4OH0.r4h3TTiDWYAHl1IKitu_TDysG9W97LYeW0Vge6wy5V0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8072/product-services/v1/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"product-services",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "USERS - GET-ROLES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/user-services/v1/users/admin@wxauction.com/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"user-services",
+								"v1",
+								"users",
+								"admin@wxauction.com",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AUTH - VALIDATE-TOKEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8072/authentication-services/v1/api/auth/validate?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjc2NDEsImV4cCI6MTc0ODIxNDA0MX0.PUhNuA9fYRuLXFauPoOxFdBf6ZyDPkfWA1T8HIi6_AmOHDFSUqSIrghMbcuBep79YSGo1nn6p42iPurEHUOprQ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8072",
+							"path": [
+								"authentication-services",
+								"v1",
+								"api",
+								"auth",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiLCJST0xFX0FETUlOIl0sInN1YiI6ImFkbWluQHd4YXVjdGlvbi5jb20iLCJpYXQiOjE3NDgxMjc2NDEsImV4cCI6MTc0ODIxNDA0MX0.PUhNuA9fYRuLXFauPoOxFdBf6ZyDPkfWA1T8HIi6_AmOHDFSUqSIrghMbcuBep79YSGo1nn6p42iPurEHUOprQ"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ACTUATOR - CIRCUITBREAKERS",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/circuitbreakers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"circuitbreakers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
