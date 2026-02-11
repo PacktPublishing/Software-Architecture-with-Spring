@@ -7,7 +7,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.4",
-    "axios": "^1.7.2",
+    "axios": "^1.13.5",
     "expo": "^53.0.9",
     "expo-asset": "~11.0.1",
     "expo-constants": "~17.0.3",
